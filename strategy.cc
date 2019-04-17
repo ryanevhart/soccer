@@ -96,7 +96,7 @@ double recent_j_attacker = -100;
 SkillType NaoBehavior::selectSkill() {
     int lock_fd;
     char lockfile[20];
-    snprintf(lockfile, sizeof(lockfile), "%d.lock");
+    snprintf(lockfile, sizeof(lockfile), "%d.lock", worldModel->getUNum());
     lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
     if (lock_fd > 0) { // need to update action
@@ -132,62 +132,50 @@ SkillType NaoBehavior::selectSkill() {
         string position = getMyPosition(worldModel->getMyPosition().getX(), worldModel->getMyPosition().getY());
 
         if (ourBall) {
+
+        	bool iHaveBall = playerClosestToBall == worldModel->getUNum();
+
             if (worldModel->getUNum() == 1) { // goalie
                 return goToTarget(VecPosition(-15, 0, 0)); 
             } else if (worldModel->getUNum() <= 6) { // attacker
                 
+                /*
+					wrapper.py arguments (assumes we're on offense)
+					1 position
+					2 goal?
+					3 iHaveBall
+                */
                 
 
                 if (worldModel->getUNum() == 2) { // striker
 
-                    if (playerClosestToBall == worldModel->getUNum()) {
-
-                    } else {
-
-                    }
+                   // this will return a location, if you're close to the ball kick it towards the location, else walk towards the location
 
                     char command[200];
-                    snprintf(command, sizeof(command), "cd /home/ryan/591/hw3/planner; python wrapper.py %c%c %c%c 2>&1 &" , position[0], position[1], offender_goal[0], offender_goal[1]);
-                    system(command);
+                    snprintf(command, sizeof(command), "cd /home/ryan/591/hw3/planner; python wrapper.py %c%c %c%c %d 2>&1 &", position[0], position[1], offender_goal[0], offender_goal[1], iHaveBall);
+                    // system(command);
+                    cout << command << endl;
 
 
                 } else if (worldModel->getUNum() == 3) { // left wing
-                    if (playerClosestToBall == worldModel->getUNum()) {
-
-                    } else {
-                        
-                    }
+                    
                 } else if (worldModel->getUNum() == 4) { // right wing
-                    if (playerClosestToBall == worldModel->getUNum()) {
-
-                    } else {
-                        
-                    }
+                    
                 } else { // rest
-                    if (playerClosestToBall == worldModel->getUNum()) {
-
-                    } else {
-                        
-                    }
+                   
                 }
 
                 return goToTarget(VecPosition(-15, 10, 0)); 
             } else { // defender
                 return goToTarget(VecPosition(-15, -10, 0)); 
             }
-        } else {
+        } else { // we are not in posession of the ball and need to defend
+        	// TODO Habib you can work on this block
             if (worldModel->getUNum() == 1) { // goalie
                 return goToTarget(VecPosition(-15, 0, 0)); 
             } else if (worldModel->getUNum() <= 6) { // attacker
                 
-
-
                 if (worldModel->getUNum() == 2) { // striker
-
-                    char command[200];
-                    snprintf(command, sizeof(command), "cd /home/ryan/591/hw3/planner; python wrapper.py %c%c %c%c 2>&1 &" , position[0], position[1], offender_goal[0], offender_goal[1]);
-                    system(command);
-
 
                 } else if (worldModel->getUNum() == 3) { // left wing
 
