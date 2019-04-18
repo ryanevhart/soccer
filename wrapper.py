@@ -10,35 +10,40 @@ import time
 """ can take argv[3]
 Close truth table
 S L R
-F F F 0 
-F T T 1
-T F T 2
-T T F 3
-T T T 4
+F F F 0
+F F T 1
+F T F 2
+F T T 3 --
+T F F 4
+T F T 5 --
+T T F 6 --
+T T T 7 --
 """
 
 unum = int(sys.argv[1])
 
 ballCarrierString = ""
 ballCarrier = int(sys.argv[2])
-if ballCarrier == 0:
+if ballCarrier == 2:
 	ballCarrierString = "STRIKER"
-elif ballCarrier == 1:
+elif ballCarrier == 3:
 	ballCarrierString = "LEFT"
-else:
+elif ballCarrier == 4:
 	ballCarrierString = "RIGHT"
+else:
+	ballCarrierString = "NONE"
 
 
 closeValueString = ""
 closeValue = int(sys.argv[3])
-if closeValue == 1:
-	closeValueString = "\n(CLOSE LEFT RIGHT)\n(CLOSE RIGHT LEFT)"
-elif closeValue == 2:
-	closeValueString = "\n(CLOSE STRIKER RIGHT)\n(CLOSE RIGHT STRIKER)"
-elif closeValue == 3:
-	closeValueString = "\n(CLOSE STRIKER LEFT)\n(CLOSE LEFT STRIKER)"
-elif closeValue == 4:
-	closeValueString = "\n(CLOSE STRIKER LEFT)\n(CLOSE LEFT STRIKER)\n(CLOSE STRIKER RIGHT)\n(CLOSE RIGHT STRIKER)\n(CLOSE LEFT RIGHT)\n(CLOSE RIGHT LEFT)"
+if closeValue & 3 == 3:
+	closeValueString += "\n(CLOSE LEFT RIGHT)\n(CLOSE RIGHT LEFT)"
+
+if closeValue & 5 == 5:
+	closeValueString += "\n(CLOSE STRIKER RIGHT)\n(CLOSE RIGHT STRIKER)"
+
+if closeValue & 6 == 6:
+	closeValueString += "\n(CLOSE STRIKER LEFT)\n(CLOSE LEFT STRIKER)"
 
 
 goal = sys.argv[4] # can take values [touchdown | AT ?p ?loc]
@@ -48,7 +53,7 @@ problem_contents = """(define (problem attacker)
 	(:domain SOCCER)
 
 	(:objects
-		STRIKER LEFT RIGHT
+		STRIKER LEFT RIGHT NONE
 		AA AB AC AD AE AF AG AH AI AJ BA BB BC BD BE BF BG BH BI BJ CA CB CC CD CE CF CG CH CI CJ DA DB DC DD DE DF DG DH DI DJ EA EB EC ED EE EF EG EH EI EJ FA FB FC FD FE FF FG FH FI FJ GA GB GC GD GE GF GG GH GI GJ HA HB HC HD HE HF HG HH HI HJ IA IB IC ID IE IF IG IH II IJ JA JB JC JD JE JF JG JH JI JJ
 	)
 
@@ -441,8 +446,8 @@ arr = out.splitlines()
 
 # print out
 
-solnFile = "/home/ryan/591/hw3/%d.soln" % (unum)
-lockFile = "/home/ryan/591/hw3/%d.lock" % (unum)
+solnFile = "/home/ryan/591/final/%d.soln" % (unum)
+lockFile = "/home/ryan/591/final/%d.lock" % (unum)
 
 writeAction = False
 
@@ -472,7 +477,7 @@ for line in arr:
 
 if not writeAction:
 	with open(solnFile, 'w') as file:
-		file.write('STAND') # to file
+		file.write('stand') # to file
 		file.close()
 
 os.remove(lockFile)

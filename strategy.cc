@@ -93,13 +93,28 @@ double recent_j = -100;
 double recent_i_attacker = -100;
 double recent_j_attacker = -100;
 
+int close(double x1, double y1, double x2, double y2) {
+	int diff = abs(x1 - x2) + abs(y1 - y2);
+	if (diff <= 7) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
 SkillType NaoBehavior::selectSkill() {
     int lock_fd;
-    char lockfile[20];
-    snprintf(lockfile, sizeof(lockfile), "%d.lock", worldModel->getUNum());
+    char lockfile[50];
+    snprintf(lockfile, sizeof(lockfile), "/home/ryan/591/final/%d.lock", worldModel->getUNum());
     lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
-    if (lock_fd > 0) { // need to update action
+    char solnFile[50];
+    snprintf(solnFile, sizeof(solnFile), "/home/ryan/591/final/%d.soln", worldModel->getUNum());
+
+    // cout << lockfile << "," << lock_fd << endl;
+    int unum = worldModel->getUNum();
+    
+    if (lock_fd > 0 || !(unum == 2 || unum == 3 || unum == 4)) { // need to update action
 
         int playerClosestToBall = -1;
         double closestDistanceToBall = 10000;
@@ -128,8 +143,10 @@ SkillType NaoBehavior::selectSkill() {
         }
 
         bool ourBall = playerClosestToBall <= 11;
+        // cout << ourBall << endl;
 
-        string position = getMyPosition(worldModel->getMyPosition().getX(), worldModel->getMyPosition().getY());
+        string position = getMyPosition(worldModel->getMyPosition().getX(), worldModel->getMyPosition().getY()); // todo remove
+
 
         if (ourBall) {
 
@@ -141,29 +158,112 @@ SkillType NaoBehavior::selectSkill() {
                 
                 /*
 					wrapper.py arguments (assumes we're on offense)
-					1 position
-					2 goal?
-					3 iHaveBall
+					1 unum-me
+					2 unum-ball carrier
+					3 close values
+					4 goal
+					5 striker pos
+					6 left pos
+					7 right pos
                 */
+
+                string strikerPos = getMyPosition(worldModel->getWorldObject(2)->pos.getX(), worldModel->getWorldObject(2)->pos.getY());
+                string leftPos = getMyPosition(worldModel->getWorldObject(3)->pos.getX(), worldModel->getWorldObject(3)->pos.getY());
+                string rightPos = getMyPosition(worldModel->getWorldObject(4)->pos.getX(), worldModel->getWorldObject(4)->pos.getY());
                 
 
                 if (worldModel->getUNum() == 2) { // striker
 
+                	int closeVal = 4;
+                	if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(3)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(3)->pos.getY())) {
+                		closeVal = closeVal + 2;
+                	}
+
+                	if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(4)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(4)->pos.getY())) {
+                		closeVal = closeVal + 1;
+                	}
+
                    // this will return a location, if you're close to the ball kick it towards the location, else walk towards the location
 
-                    char command[200];
-                    snprintf(command, sizeof(command), "cd /home/ryan/591/hw3/planner; python wrapper.py %c%c %c%c %d 2>&1 &", position[0], position[1], offender_goal[0], offender_goal[1], iHaveBall);
-                    // system(command);
-                    cout << command << endl;
+                	if (iHaveBall) {
+                		char command[200];
+	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    // system(command);
+	                    cout << command << endl;
+                	} else {
+                		char command[200];
+	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'at striker EI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    // system(command);
+	                    cout << command << endl;
+                	}
+	                    
 
 
                 } else if (worldModel->getUNum() == 3) { // left wing
+
+                	int closeVal = 2;
+                	if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(2)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(2)->pos.getY())) {
+                		closeVal = closeVal + 4;
+                	}
+
+                	if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(4)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(4)->pos.getY())) {
+                		closeVal = closeVal + 1;
+                	}
+
+                	if (iHaveBall) {
+                		char command[200];
+	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    // system(command);
+	                    cout << command << endl;
+                	} else {
+                		char command[200];
+	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'at left CI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    // system(command);
+	                    cout << command << endl;
+                	}
                     
                 } else if (worldModel->getUNum() == 4) { // right wing
-                    
+                    int closeVal = 1;
+                	if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(3)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(3)->pos.getY())) {
+                		closeVal = closeVal + 2;
+                	}
+
+                	if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(2)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(2)->pos.getY())) {
+                		closeVal = closeVal + 4;
+                	}
+
+                	if (iHaveBall) {
+                		char command[200];
+	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    // system(command);
+	                    cout << command << endl;
+                	} else {
+                		char command[200];
+	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'at right HI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    // system(command);
+	                    cout << command << endl;
+                	}
+
                 } else { // rest
-                   
+                 	if (iHaveBall) {
+                 		if (closestDistanceToBall < 0.5) { 
+					        return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+					    } else { // otherwise walk in the direction of the ball
+					        return goToTarget(ball);
+					    }
+
+                 	}  
                 }
+
+                FILE* f;
+	            if ((f = fopen(solnFile, "r"))) {
+	                fseek(f, 0, SEEK_END);
+	                size_t size = ftell(f);
+	                char* cont = new char[size];
+	                rewind(f);
+	                fread(cont, sizeof(char), size, f);
+	                cout << worldModel->getUNum() << ": file contents: " << cont << endl; 
+	            } 
 
                 return goToTarget(VecPosition(-15, 10, 0)); 
             } else { // defender
