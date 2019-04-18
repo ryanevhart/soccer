@@ -5,7 +5,7 @@ import time
 
 # TODO need to take the unum as argv[1] to do %d.soln and %d.lock
 
-""" can take argv[2]
+""" can take argv[3]
 Close truth table
 S L R
 F F F 0 
@@ -15,11 +15,20 @@ T T F 3
 T T T 4
 """
 
+unum = sys.argv[1]
+
 ballCarrierString = ""
-ballCarrier = int(sys.argv[4])
+ballCarrier = int(sys.argv[2])
+if ballCarrier == 0:
+	ballCarrierString = "STRIKER"
+elif ballCarrier == 1:
+	ballCarrierString = "LEFT"
+else:
+	ballCarrierString = "RIGHT"
+
 
 closeValueString = ""
-closeValue = int(sys.argv[2])
+closeValue = int(sys.argv[3])
 if closeValue == 1:
 	closeValueString = "\n(CLOSE LEFT RIGHT)\n(CLOSE RIGHT LEFT)"
 elif closeValue == 2:
@@ -30,12 +39,7 @@ elif closeValue == 4:
 	closeValueString = "\n(CLOSE STRIKER LEFT)\n(CLOSE LEFT STRIKER)\n(CLOSE STRIKER RIGHT)\n(CLOSE RIGHT STRIKER)\n(CLOSE LEFT RIGHT)\n(CLOSE RIGHT LEFT)"
 
 
-if ballCarrier == 0:
-	ballCarrierString = "STRIKER"
-elif ballCarrier == 1:
-	ballCarrierString = "LEFT"
-else:
-	ballCarrierString = "RIGHT"
+
 
 problem_contents = """(define (problem attacker)
 	(:domain SOCCER)
@@ -412,18 +416,11 @@ problem_contents = """(define (problem attacker)
 		(CONNECTED JJ IJ))
 
 	(:goal 
-		(or 
-			(and 
-				(touchdown) 
-				(hasball ME)
-			)
-			(and
-				(not (hasball ME))
-			)
-		)
-	)
+		(touchdown))
 )
-""" % (sys.argv[1], sys.argv[2], sys.argv[3], ballCarrierString)
+""" % (sys.argv[4], sys.argv[5], sys.argv[6], ballCarrierString, closeValueString)
+
+print problem_contents
 
 # timestamp = str(time.time())
 
@@ -444,27 +441,27 @@ out, err = proc.communicate()
 # print out
 arr = out.splitlines()
 
-#print out
+print out
 
-for line in arr:
-	if "move " in line:
+# for line in arr:
+# 	if "move " in line:
 
-		i = 0
-		for field in line.split(" "):
-			if i == 2:
-				with open('/home/ryan/591/hw3/attacker.soln', 'w') as file:
-					# file.write(str(ord(field[0]) - 97))
-					# file.write(str(ord(field[1]) - 97))
-					file.write(str(field[0]))
-					file.write(str(field[1]))
-					# print ord(field[0]) - 97 #prints out the i index [0-9]
-					# print ord(field[1]) - 97 #prints out the j index [0-9]
-					file.close()
+# 		i = 0
+# 		for field in line.split(" "):
+# 			if i == 2:
+# 				with open('/home/ryan/591/hw3/attacker.soln', 'w') as file:
+# 					# file.write(str(ord(field[0]) - 97))
+# 					# file.write(str(ord(field[1]) - 97))
+# 					file.write(str(field[0]))
+# 					file.write(str(field[1]))
+# 					# print ord(field[0]) - 97 #prints out the i index [0-9]
+# 					# print ord(field[1]) - 97 #prints out the j index [0-9]
+# 					file.close()
 
-					os.remove("/home/ryan/utaustinvilla3d/attack.lock")
-				break
-			i = i + 1
-		break
+# 					os.remove("/home/ryan/utaustinvilla3d/attack.lock")
+# 				break
+# 			i = i + 1
+# 		break
 
 
 
