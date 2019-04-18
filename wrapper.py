@@ -3,6 +3,8 @@ import subprocess
 import os
 import time
 
+# example: python wrapper.py 2 4 4 'AT RIGHT EI' AA BA CA
+
 # TODO need to take the unum as argv[1] to do %d.soln and %d.lock
 
 """ can take argv[3]
@@ -15,7 +17,7 @@ T T F 3
 T T T 4
 """
 
-unum = sys.argv[1]
+unum = int(sys.argv[1])
 
 ballCarrierString = ""
 ballCarrier = int(sys.argv[2])
@@ -39,6 +41,7 @@ elif closeValue == 4:
 	closeValueString = "\n(CLOSE STRIKER LEFT)\n(CLOSE LEFT STRIKER)\n(CLOSE STRIKER RIGHT)\n(CLOSE RIGHT STRIKER)\n(CLOSE LEFT RIGHT)\n(CLOSE RIGHT LEFT)"
 
 
+goal = sys.argv[4] # can take values [touchdown | AT ?p ?loc]
 
 
 problem_contents = """(define (problem attacker)
@@ -416,17 +419,13 @@ problem_contents = """(define (problem attacker)
 		(CONNECTED JJ IJ))
 
 	(:goal 
-		(touchdown))
+		(%s))
 )
-""" % (sys.argv[4], sys.argv[5], sys.argv[6], ballCarrierString, closeValueString)
+""" % (sys.argv[5], sys.argv[6], sys.argv[7], ballCarrierString, closeValueString, goal)
 
-print problem_contents
-
-# timestamp = str(time.time())
+# print problem_contents
 
 root = '/home/ryan/591/hw3/planner/' # TODO dont hardcode root
-
-# problem_file_loc = root + timestamp + "problem_file.domain"
 problem_file_loc = root + "problem_file.domain"
 
 f = open(problem_file_loc, "w")
@@ -438,33 +437,45 @@ f.close()
 proc = subprocess.Popen(['python', root + 'fast-downward.py', root + 'domain.pddl', problem_file_loc, '--search', 'astar(lmcut())'], stdout=subprocess.PIPE)
 
 out, err = proc.communicate()
-# print out
 arr = out.splitlines()
 
-print out
+# print out
 
-# for line in arr:
-# 	if "move " in line:
+solnFile = "/home/ryan/591/hw3/%d.soln" % (unum)
+lockFile = "/home/ryan/591/hw3/%d.lock" % (unum)
 
-# 		i = 0
-# 		for field in line.split(" "):
-# 			if i == 2:
-# 				with open('/home/ryan/591/hw3/attacker.soln', 'w') as file:
-# 					# file.write(str(ord(field[0]) - 97))
-# 					# file.write(str(ord(field[1]) - 97))
-# 					file.write(str(field[0]))
-# 					file.write(str(field[1]))
-# 					# print ord(field[0]) - 97 #prints out the i index [0-9]
-# 					# print ord(field[1]) - 97 #prints out the j index [0-9]
-# 					file.close()
+writeAction = False
 
-# 					os.remove("/home/ryan/utaustinvilla3d/attack.lock")
-# 				break
-# 			i = i + 1
-# 		break
+for line in arr:
+	if "(1)" in line:
+		if unum == 2 and "striker" in line:
+			writeAction = True
+		elif unum == 3 and "left" in line:
+			writeAction = True
+		elif unum == 4 and "right" in line:
+			writeAction = True
+	
+	if writeAction:
+		with open(solnFile, 'w') as file:
+			if "move" in line:
+				fields = line.split(" ")
+				file.write("move " + fields[3])
+			elif "shoot" in line:
+				file.write("shoot")
+			elif "pass" in line:
+				fields = line.split(" ")
+				file.write("pass " + fields[2])
+			else:
+				print 'UNRECOGNIZED ACTION: ' + line
+			file.close()
+			break
 
+if not writeAction:
+	with open(solnFile, 'w') as file:
+		file.write('STAND') # to file
+		file.close()
 
-
+os.remove(lockFile)
 
 
 #python /home/ryan/591/hw3/planner/fast-downward.py /home/ryan/591/hw3/planner/domain.pddl /home/ryan/591/hw3/planner/right_corner_problem.pddl --search "astar(lmcut())"
