@@ -464,12 +464,12 @@ for line in arr:
 		with open(solnFile, 'w') as file:
 			if "move" in line:
 				fields = line.split(" ")
-				file.write("move " + fields[3])
+				file.write("0 " + fields[3])
 			elif "shoot" in line:
-				file.write("shoot")
+				file.write("1")
 			elif "pass" in line:
 				fields = line.split(" ")
-				file.write("pass " + fields[2])
+				file.write("2 " + fields[2])
 			else:
 				print 'UNRECOGNIZED ACTION: ' + line
 			file.close()
@@ -477,7 +477,7 @@ for line in arr:
 
 if not writeAction:
 	with open(solnFile, 'w') as file:
-		file.write('stand') # to file
+		file.write('3') # to file
 		file.close()
 
 os.remove(lockFile)

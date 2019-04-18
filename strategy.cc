@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <fcntl.h>
+#include <vector>
 
 extern int agentBodyType;
 
@@ -102,7 +103,16 @@ int close(double x1, double y1, double x2, double y2) {
 	}
 }
 
+std::map<int, SkillType> actionCache;
+
 SkillType NaoBehavior::selectSkill() {
+	// cout << "Cache size: " << actionCache.size() << endl;
+	if (actionCache[worldModel->getUNum()] == NULL) {
+		cout << "initializing action cache for " << worldModel->getUNum() << endl;
+
+		actionCache[worldModel->getUNum()] = SKILL_STAND;
+	}
+
     int lock_fd;
     char lockfile[50];
     snprintf(lockfile, sizeof(lockfile), "/home/ryan/591/final/%d.lock", worldModel->getUNum());
@@ -213,12 +223,12 @@ SkillType NaoBehavior::selectSkill() {
                 	if (iHaveBall) {
                 		char command[200];
 	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
-	                    // system(command);
+	                    system(command);
 	                    cout << command << endl;
                 	} else {
                 		char command[200];
 	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'at left CI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
-	                    // system(command);
+	                    system(command);
 	                    cout << command << endl;
                 	}
                     
@@ -235,12 +245,12 @@ SkillType NaoBehavior::selectSkill() {
                 	if (iHaveBall) {
                 		char command[200];
 	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
-	                    // system(command);
+	                    system(command);
 	                    cout << command << endl;
                 	} else {
                 		char command[200];
 	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'at right HI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
-	                    // system(command);
+	                    system(command);
 	                    cout << command << endl;
                 	}
 
@@ -262,10 +272,29 @@ SkillType NaoBehavior::selectSkill() {
 	                char* cont = new char[size];
 	                rewind(f);
 	                fread(cont, sizeof(char), size, f);
-	                cout << worldModel->getUNum() << ": file contents: " << cont << endl; 
+	                cout << worldModel->getUNum() << ": file contents: " << cont << "| action command = " << cont[0] << endl;
+
+	                /*
+						0 index of file is action id [0:move {tile}|1:shoot|2:pass {member}|3:stand]
+	                */
+
+	                if (cont[0] == '0') {
+	                	cout << unum << " move to " << cont[2] << cont[3] << endl;
+	                } else if (cont[0] == '1') {
+	                	cout << unum << " shoot" << endl;
+	                } else if (cont[0] == '2') {
+	                	cout << unum << " pass " << cont[2] << endl;
+	                } else if (cont[0] == '3') {
+	                	cout << unum << " stand " << endl;
+	                }
+
+	                double dest_xval = -HALF_FIELD_X + x_increment * (int(cont[1]) - 97);
+	                double dest_yval = HALF_FIELD_Y + -y_increment * (int(cont[0]) - 97);
+	                actionCache[unum] = goToTarget(VecPosition(dest_xval, dest_yval, 0));
+	                // cout << unum << " to " << dest_xval << "," << dest_yval << endl;
 	            } 
 
-                return goToTarget(VecPosition(-15, 10, 0)); 
+                return actionCache[unum]; 
             } else { // defender
                 return goToTarget(VecPosition(-15, -10, 0)); 
             }
@@ -294,7 +323,7 @@ SkillType NaoBehavior::selectSkill() {
         
 
     } else {
-
+    	return actionCache[unum];
     }
     
 
