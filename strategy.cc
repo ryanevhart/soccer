@@ -103,14 +103,23 @@ int close(double x1, double y1, double x2, double y2) {
 	}
 }
 
-std::map<int, SkillType> actionCache;
+SkillType cache2;
+SkillType cache3;
+SkillType cache4;
 
 SkillType NaoBehavior::selectSkill() {
 	// cout << "Cache size: " << actionCache.size() << endl;
-	if (actionCache[worldModel->getUNum()] == NULL) {
+	if (cache2 == NULL && worldModel->getUNum() == 2) {
 		cout << "initializing action cache for " << worldModel->getUNum() << endl;
+		cache2 = SKILL_STAND;
 
-		actionCache[worldModel->getUNum()] = SKILL_STAND;
+	} else if (cache3 == NULL && worldModel->getUNum() == 3) {
+		cout << "initializing action cache for " << worldModel->getUNum() << endl;
+		cache3 = SKILL_STAND;
+
+	} else if (cache4 == NULL && worldModel->getUNum() == 4) {
+		cout << "initializing action cache for " << worldModel->getUNum() << endl;
+		cache4 = SKILL_STAND;
 	}
 
     int lock_fd;
@@ -180,6 +189,11 @@ SkillType NaoBehavior::selectSkill() {
                 string strikerPos = getMyPosition(worldModel->getWorldObject(2)->pos.getX(), worldModel->getWorldObject(2)->pos.getY());
                 string leftPos = getMyPosition(worldModel->getWorldObject(3)->pos.getX(), worldModel->getWorldObject(3)->pos.getY());
                 string rightPos = getMyPosition(worldModel->getWorldObject(4)->pos.getX(), worldModel->getWorldObject(4)->pos.getY());
+
+                
+
+                // TODO just do a read from the solution file for every tick
+                
                 
 
                 if (worldModel->getUNum() == 2) { // striker
@@ -198,12 +212,12 @@ SkillType NaoBehavior::selectSkill() {
                 	if (iHaveBall) {
                 		char command[200];
 	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
-	                    // system(command);
+	                    system(command);
 	                    cout << command << endl;
                 	} else {
                 		char command[200];
 	                    snprintf(command, sizeof(command), "python /home/ryan/591/hw3/planner/wrapper.py %d %d %d 'at striker EI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), closeVal, playerClosestToBall, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
-	                    // system(command);
+	                    system(command);
 	                    cout << command << endl;
                 	}
 	                    
@@ -261,40 +275,8 @@ SkillType NaoBehavior::selectSkill() {
 					    } else { // otherwise walk in the direction of the ball
 					        return goToTarget(ball);
 					    }
-
                  	}  
                 }
-
-                FILE* f;
-	            if ((f = fopen(solnFile, "r"))) {
-	                fseek(f, 0, SEEK_END);
-	                size_t size = ftell(f);
-	                char* cont = new char[size];
-	                rewind(f);
-	                fread(cont, sizeof(char), size, f);
-	                cout << worldModel->getUNum() << ": file contents: " << cont << "| action command = " << cont[0] << endl;
-
-	                /*
-						0 index of file is action id [0:move {tile}|1:shoot|2:pass {member}|3:stand]
-	                */
-
-	                if (cont[0] == '0') {
-	                	cout << unum << " move to " << cont[2] << cont[3] << endl;
-	                } else if (cont[0] == '1') {
-	                	cout << unum << " shoot" << endl;
-	                } else if (cont[0] == '2') {
-	                	cout << unum << " pass " << cont[2] << endl;
-	                } else if (cont[0] == '3') {
-	                	cout << unum << " stand " << endl;
-	                }
-
-	                double dest_xval = -HALF_FIELD_X + x_increment * (int(cont[1]) - 97);
-	                double dest_yval = HALF_FIELD_Y + -y_increment * (int(cont[0]) - 97);
-	                actionCache[unum] = goToTarget(VecPosition(dest_xval, dest_yval, 0));
-	                // cout << unum << " to " << dest_xval << "," << dest_yval << endl;
-	            } 
-
-                return actionCache[unum]; 
             } else { // defender
                 return goToTarget(VecPosition(-15, -10, 0)); 
             }
@@ -319,187 +301,41 @@ SkillType NaoBehavior::selectSkill() {
                 return goToTarget(VecPosition(-15, -10, 0)); 
             }
         }      
+    }
+	
 
+	FILE* f;
+    if ((f = fopen(solnFile, "r"))) {
+        fseek(f, 0, SEEK_END);
+        size_t size = ftell(f);
+        char* cont = new char[size];
+        rewind(f);
+        fread(cont, sizeof(char), size, f);
+        // cout << worldModel->getUNum() << ": file contents: " << cont << "| action command = " << cont[0] << endl;
+
+        /*
+			0 index of file is action id [0:move {tile}|1:shoot|2:pass {member}|3:stand]
+        */
+
+        SkillType updatedAction;
         
 
+        if (cont[0] == '0') {
+        	double dest_xval = -HALF_FIELD_X + x_increment * (int(cont[3]) - 97);
+        	double dest_yval = HALF_FIELD_Y + -y_increment * (int(cont[2]) - 97);
+        	updatedAction = goToTarget(VecPosition(dest_xval, dest_yval, 0));
+        	cout << unum << " move to " << cont[2] << cont[3] << " - (" << dest_xval << "," << dest_yval << ")" << endl;
+        } else if (cont[0] == '1') {
+        	cout << unum << " shoot" << endl;
+        	updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+        } else if (cont[0] == '2') {
+        	cout << unum << " pass (NEED TO FIX) " << cont[2] << endl;
+        	updatedAction = SKILL_STAND; // TODO
+        }
+
+        return updatedAction;
     } else {
-    	return actionCache[unum];
+    	cout << "couldn't find solution file for agent " << unum << endl;
+    	return SKILL_STAND;
     }
-    
-
-    return SKILL_STAND;
-
-    double closest_i = 100;// used in the defender block to decide action
-    double closest_j = 100;
-
-    
-    double i;
-    double j;
-
-    
-    double closest_i_distance = 100;
-    
-    double closest_j_distance = 100;
-    
-
-    double xPos, yPos;
-    if (worldModel->getUNum() == 1) {
-        xPos = worldModel->getMyPosition().getX();
-        yPos = worldModel->getMyPosition().getY();
-    } else {
-        xPos = worldModel->getWorldObject(1)->pos.getX();
-        yPos = worldModel->getWorldObject(1)->pos.getY();
-    }
-
-    for (j = HALF_FIELD_Y; j >= -HALF_FIELD_Y; j-=y_increment) {
-        if (closest_j_distance > abs(yPos - j)) {
-            closest_j = j;
-            closest_j_distance = abs(yPos - j);
-        }
-    }
-
-    for (i = -HALF_FIELD_X; i <= HALF_FIELD_X; i+=x_increment) {    
-        if (closest_i_distance > abs(xPos - i)) {
-            closest_i = i;
-            closest_i_distance = abs(xPos - i);
-        }
-    }
-
-    int fd;
-    if (worldModel->getUNum() == 1) { // the locks are removed when the spawned processes finish
-        char* filename = "./attack.lock";
-        fd = open(filename, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); // this is an atomic process
-    } else {
-        char* filename = "./defend.lock";
-        fd = open(filename, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    }
-
-    
-
-    //# action0 - up
-    //# action1 - left
-    //# action2 - down
-    //# action3 - right
-    //# goal0 - left corner
-    //# goal1 - left post
-    //# goal2 - right post
-    //# goal3 - right corner
-        
-
-    if (worldModel->getUNum() == 1 && fd > -1) { //attacker
-
-        //cout << "attacker updating" << endl;
-
-        if (goal == -1) {
-
-            goal = rand() % 4;
-            if (goal == 0) {
-                offender_goal = "JA";
-            } else if (goal == 1) {
-                offender_goal = "FA";
-            } else if (goal == 2) {
-                offender_goal = "EA";
-            } else {
-                offender_goal = "AA";
-            }
-
-            attackerPlan = goToTarget(VecPosition(0, 0, 0)); // initial value
-            cout << "offender chose goal " << offender_goal << endl;
-        } else {
-            FILE* f;
-            if ((f = fopen("/home/ryan/591/hw3/attacker.soln", "r"))) {
-                fseek(f, 0, SEEK_END);
-                size_t size = ftell(f);
-                char* cont = new char[size];
-                rewind(f);
-                fread(cont, sizeof(char), size, f);
-                //cout << "file contents: " << cont[0] - 97 << cont[1] - 97 << endl; 
-
-
-                double dest_xval = -HALF_FIELD_X + x_increment * (int(cont[1]) - 97);
-                double dest_yval = HALF_FIELD_Y + -y_increment * (int(cont[0]) - 97);
-                attackerPlan = goToTarget(VecPosition(dest_xval, dest_yval, 0));
-                //cout << "attacker to " << dest_xval << "," << dest_yval << endl;
-            } 
-        }
-
-        string position = getMyPosition(worldModel->getMyPosition().getX(), worldModel->getMyPosition().getY());
-        char command[200];
-        snprintf(command, sizeof(command), "cd /home/ryan/591/hw3/planner; python wrapper.py %c%c %c%c 2>&1 &" , position[0], position[1], offender_goal[0], offender_goal[1]);
-        system(command);
-
-        return attackerPlan;
-    } else if (worldModel->getUNum() == 2 && fd > -1) { //defender
-
-        //cout << "defender updating" << endl;
-
-        if (timeSlice == 0) {
-            defenderPlan = goToTarget(VecPosition(0, 0, 0));
-        } else {
-            FILE* f;
-            if ((f = fopen("/home/ryan/591/hw3/defender.soln", "r"))) {
-                fseek(f, 0, SEEK_END);
-                size_t size = ftell(f);
-                char* cont = new char[size];
-                rewind(f);
-                fread(cont, sizeof(char), size, f);
-                //cout << "file contents: " << cont[0] << endl;
-
-                if (cont[0] == '0') {
-                    cout << "defender suspects left corner" << endl;
-                    defenderPlan = goToTarget(VecPosition(-15, -10, 0));
-                } else if (cont[0] == '1') {
-                    cout << "defender suspects left post" << endl;
-                    defenderPlan = goToTarget(VecPosition(-15, -1.1, 0));
-                } else if (cont[0] == '2') {
-                    cout << "defender suspects right post" << endl;
-                    defenderPlan = goToTarget(VecPosition(-15, 1.1, 0));
-                } else if (cont[0] == '3') {
-                    cout << "defender suspects right corner" << endl;
-                    defenderPlan = goToTarget(VecPosition(-15, 10, 0));
-                }
-            } 
-        }
-
-        timeSlice++;
-
-        int action;
-
-        if (closest_i > recent_i) {
-            action = 3;//left
-        } else if (closest_i < recent_i) {
-            action = 1;//right
-        } else if (closest_j > recent_j) {
-            action = 0;//up
-        } else { // closest_j < recent_j
-            action = 2;//down
-        }
-
-        //cout << "(" << closest_i << "," << closest_j << ") " << endl;
-        
-
-
-        char command[200];
-        snprintf(command, sizeof(command), "python -W ignore /home/ryan/591/hw3/dbn.py %d %d 2>&1 &", timeSlice, action); //dbn.py is resposible for removing the lock
-        system(command);
-
-
-        return defenderPlan;
-    } else if (worldModel->getUNum() == 1) { // the lock was not released, use cahced commands
-        //return attackerPlan;
-
-        int shouldAttackerActRandomly = rand() % 10; // generates number [0,9]
-        if (shouldAttackerActRandomly < 4) { //40% chance of acting according to plan
-            return attackerPlan;
-        } else {
-            int x_offset = (rand() % 2) - 2; // [-1, 1]
-            int y_offset = (rand() % 2) - 2; // [-1, 1]
-            return goToTarget(VecPosition(worldModel->getMyPosition().getX() + x_offset, 
-                worldModel->getMyPosition().getY() + y_offset, 
-                0));
-        }
-    } else {
-        return defenderPlan;
-    }
-
 }

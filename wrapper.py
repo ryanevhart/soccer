@@ -475,12 +475,7 @@ for line in arr:
 			file.close()
 			break
 
-if not writeAction:
-	with open(solnFile, 'w') as file:
-		file.write('3') # to file
-		file.close()
+
 
 os.remove(lockFile)
-
-
 #python /home/ryan/591/hw3/planner/fast-downward.py /home/ryan/591/hw3/planner/domain.pddl /home/ryan/591/hw3/planner/right_corner_problem.pddl --search "astar(lmcut())"
