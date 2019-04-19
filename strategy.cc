@@ -91,7 +91,6 @@ int close(double x1, double y1, double x2, double y2) {
 }
 
 SkillType NaoBehavior::selectSkill() {
-	// return goToTarget(VecPosition(15, 0, 0));
     int lock_fd;
     char lockfile[50];
     snprintf(lockfile, sizeof(lockfile), "/home/ryan/591/final/%d.lock", worldModel->getUNum());
@@ -100,9 +99,7 @@ SkillType NaoBehavior::selectSkill() {
     char solnFile[50];
     snprintf(solnFile, sizeof(solnFile), "/home/ryan/591/final/%d.soln", worldModel->getUNum());
 
-    // cout << lockfile << "," << lock_fd << endl;
     int unum = worldModel->getUNum();
-    // cout << unum << endl;
 
 	int playerClosestToBall = -1;
     double closestDistanceToBall = 10000;
@@ -236,6 +233,11 @@ SkillType NaoBehavior::selectSkill() {
 					        return goToTarget(ball);
 					    }
                  	} else {
+                 		if (unum == 5) {
+                 			return goToTarget(VecPosition(5, 5, 0));
+                 		} else if (unum == 6) {
+                 			return goToTarget(VecPosition(5, -5, 0));
+                 		}
                  		return SKILL_STAND;
                  	}
                 }
@@ -245,7 +247,7 @@ SkillType NaoBehavior::selectSkill() {
         } else { // we are not in posession of the ball and need to defend
         	// TODO Habib you can work on this block
             if (worldModel->getUNum() == 1) { // goalie
-                return goToTarget(VecPosition(-15, 0, 0)); 
+                return goToTarget(VecPosition(-15, 0, 0));
             } else if (worldModel->getUNum() <= 6) { // attacker
                 
                 if (worldModel->getUNum() == 2) { // striker

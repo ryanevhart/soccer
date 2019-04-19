@@ -450,7 +450,7 @@ solnFile = "/home/ryan/591/final/%d.soln" % (unum)
 lockFile = "/home/ryan/591/final/%d.lock" % (unum)
 
 
-alreadyWrote = False
+alreadyWrote = 0
 
 for line in arr:
 	writeAction = False
@@ -464,7 +464,9 @@ for line in arr:
 			writeAction = True
 	
 	if writeAction:
-		if alreadyWrote and "move" not in line:
+		if alreadyWrote > 3: # look a couple move steps ahead, updating for a single move is too frequent and causes constant falling
+			break
+		if alreadyWrote > 0 and "move" not in line: # look a couple move steps ahead, updating for a single move is too frequent and causes constant falling
 			break
 		with open(solnFile, 'w') as file:	
 			if "move" in line:
@@ -480,7 +482,7 @@ for line in arr:
 			else:
 				print 'UNRECOGNIZED ACTION: ' + line
 			file.close()			
-		alreadyWrote = True
+		alreadyWrote = alreadyWrote + 1
 		
 
 time.sleep(10) # this python file being kicked off makes all the agents fall, sleep the agents have time to actually excecute their plan
