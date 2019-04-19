@@ -449,9 +449,12 @@ arr = out.splitlines()
 solnFile = "/home/ryan/591/final/%d.soln" % (unum)
 lockFile = "/home/ryan/591/final/%d.lock" % (unum)
 
-writeAction = False
+
+alreadyWrote = False
 
 for line in arr:
+	writeAction = False
+
 	if "(1)" in line:
 		if unum == 2 and "striker" in line:
 			writeAction = True
@@ -461,21 +464,25 @@ for line in arr:
 			writeAction = True
 	
 	if writeAction:
-		with open(solnFile, 'w') as file:
+		if alreadyWrote and "move" not in line:
+			break
+		with open(solnFile, 'w') as file:	
 			if "move" in line:
 				fields = line.split(" ")
 				file.write("0 " + fields[3])
 			elif "shoot" in line:
 				file.write("1")
+				break
 			elif "pass" in line:
 				fields = line.split(" ")
 				file.write("2 " + fields[2])
+				break
 			else:
 				print 'UNRECOGNIZED ACTION: ' + line
-			file.close()
-			break
+			file.close()			
+		alreadyWrote = True
+		
 
-
-
+time.sleep(10) # this python file being kicked off makes all the agents fall, sleep the agents have time to actually excecute their plan
 os.remove(lockFile)
 #python /home/ryan/591/hw3/planner/fast-downward.py /home/ryan/591/hw3/planner/domain.pddl /home/ryan/591/hw3/planner/right_corner_problem.pddl --search "astar(lmcut())"
