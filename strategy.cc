@@ -128,14 +128,25 @@ SkillType NaoBehavior::selectSkill() {
     }
 
     bool imClosestToBall = playerClosestToBall == worldModel->getUNum();
+    bool ourBall = playerClosestToBall <= 11;
+
+    bool dontReadCommandFromFile = ourBall && !(unum == 2 || unum == 3 || unum == 4); //2,3,4 are the only agents that read from file rn
     
-    if (lock_fd > 0 || !(unum == 2 || unum == 3 || unum == 4)) { // need to update action
-        bool ourBall = playerClosestToBall <= 11;
+    if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
 
         if (ourBall) {
 
             if (worldModel->getUNum() == 1) { // goalie
-                return goToTarget(VecPosition(-15, 0, 0)); 
+            	if (imClosestToBall) {
+             		if (closestDistanceToBall < 0.5) { 
+				        return kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+				    } else { // otherwise walk in the direction of the ball
+				        return goToTarget(ball);
+				    }
+             	} else {
+             		return goToTarget(VecPosition(-15, 0, 0));
+             	}
+                 
             } else if (worldModel->getUNum() <= 6) { // attacker
                 
                 /*
@@ -241,8 +252,27 @@ SkillType NaoBehavior::selectSkill() {
                  		return SKILL_STAND;
                  	}
                 }
-            } else { // defender during attack
-                return goToTarget(VecPosition(-15, -10, 0)); 
+            } else { // defender during attack [7,11]
+
+            	if (imClosestToBall) {
+             		if (closestDistanceToBall < 0.5) { 
+				        return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+				    } else { // otherwise walk in the direction of the ball
+				        return goToTarget(ball);
+				    }
+             	} else {
+             		if (unum == 7) {
+             			return goToTarget(VecPosition(0, 10, 0)); 
+	            	} else if (unum == 8) {
+	            		return goToTarget(VecPosition(0, 5, 0)); 
+	            	} else if (unum == 9) {
+	            		return goToTarget(VecPosition(0, 0, 0)); 
+	            	} else if (unum == 10) {
+	            		return goToTarget(VecPosition(0, -5, 0)); 
+	            	} else {
+	            		return goToTarget(VecPosition(0, -10, 0)); 
+	            	}
+             	}
             }
         } else { // we are not in posession of the ball and need to defend
         	// TODO Habib you can work on this block
