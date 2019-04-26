@@ -1,0 +1,5 @@
+(move cb ca)
+(move ca da)
+(move da ea)
+(move ea fa)
+; cost = 4 (unit cost)
