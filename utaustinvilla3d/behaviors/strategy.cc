@@ -93,11 +93,11 @@ int close(double x1, double y1, double x2, double y2) {
 SkillType NaoBehavior::selectSkill() {
     int lock_fd;
     char lockfile[50];
-    snprintf(lockfile, sizeof(lockfile), "../../%d.lock", worldModel->getUNum());
+    snprintf(lockfile, sizeof(lockfile), "../%d.lock", worldModel->getUNum());
     lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
     char solnFile[50];
-    snprintf(solnFile, sizeof(solnFile), "../../%d.soln", worldModel->getUNum());
+    snprintf(solnFile, sizeof(solnFile), "../%d.soln", worldModel->getUNum());
 
     int unum = worldModel->getUNum();
 
@@ -179,12 +179,12 @@ SkillType NaoBehavior::selectSkill() {
 
                 	if (imClosestToBall) {
                 		char command[200];
-	                    snprintf(command, sizeof(command), "python ../../planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    snprintf(command, sizeof(command), "python ../planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
 	                    system(command);
 	                    cout << command << endl;
                 	} else {
                 		char command[200];
-	                    snprintf(command, sizeof(command), "python ../../planner/wrapper.py %d %d %d 'at striker EI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    snprintf(command, sizeof(command), "python ../planner/wrapper.py %d %d %d 'at striker EI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
 	                    system(command);
 	                    cout << command << endl;
                 	}
@@ -204,12 +204,12 @@ SkillType NaoBehavior::selectSkill() {
 
                 	if (imClosestToBall) {
                 		char command[200];
-	                    snprintf(command, sizeof(command), "python ../../planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    snprintf(command, sizeof(command), "python ../planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
 	                    system(command);
 	                    cout << command << endl;
                 	} else {
                 		char command[200];
-	                    snprintf(command, sizeof(command), "python ../../planner/wrapper.py %d %d %d 'at left CI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    snprintf(command, sizeof(command), "python ../planner/wrapper.py %d %d %d 'at left CI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
 	                    system(command);
 	                    cout << command << endl;
                 	}
@@ -226,12 +226,12 @@ SkillType NaoBehavior::selectSkill() {
 
                 	if (imClosestToBall) {
                 		char command[200];
-	                    snprintf(command, sizeof(command), "python ../../planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    snprintf(command, sizeof(command), "python ../planner/wrapper.py %d %d %d 'touchdown' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
 	                    system(command);
 	                    cout << command << endl;
                 	} else {
                 		char command[200];
-	                    snprintf(command, sizeof(command), "python ../../planner/wrapper.py %d %d %d 'at right HI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
+	                    snprintf(command, sizeof(command), "python ../planner/wrapper.py %d %d %d 'at right HI' %c%c %c%c %c%c 2>&1 &", worldModel->getUNum(), playerClosestToBall, closeVal, strikerPos[0], strikerPos[1], leftPos[0], leftPos[1], rightPos[0], rightPos[1]);
 	                    system(command);
 	                    cout << command << endl;
                 	}

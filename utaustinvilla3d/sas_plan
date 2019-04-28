@@ -1,0 +1,6 @@
+(move right ee ef)
+(move right ef eg)
+(move right eg eh)
+(move right eh ei)
+(shoot right)
+; cost = 5 (unit cost)

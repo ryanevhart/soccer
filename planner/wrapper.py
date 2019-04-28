@@ -430,7 +430,7 @@ problem_contents = """(define (problem attacker)
 
 # print problem_contents
 
-root = '/home/ryan/591/hw3/planner/' # TODO dont hardcode root
+root = '../planner/' # TODO dont hardcode root
 problem_file_loc = root + "problem_file.domain"
 
 f = open(problem_file_loc, "w")
@@ -446,8 +446,8 @@ arr = out.splitlines()
 
 # print out
 
-solnFile = "/home/ryan/591/final/%d.soln" % (unum)
-lockFile = "/home/ryan/591/final/%d.lock" % (unum)
+solnFile = "../%d.soln" % (unum)
+lockFile = "../%d.lock" % (unum)
 
 
 alreadyWrote = 0
