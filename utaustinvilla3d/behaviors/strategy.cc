@@ -239,47 +239,59 @@ SkillType NaoBehavior::selectSkill() {
                     }
 
                 } else { // assistant attackers
+                    SkillType action;
                     if (imClosestToBall) {
                         if (closestDistanceToBall < 0.5) { 
-                            return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+                            action = kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
                         } else { // otherwise walk in the direction of the ball
-                            return goToTarget(ball);
+                            action = goToTarget(ball);
                         }
                     } else {
                         if (unum == 5) {
-                            return goToTarget(VecPosition(5, 5, 0));
+                            action = goToTarget(VecPosition(5, 5, 0));
                         } else if (unum == 6) {
-                            return goToTarget(VecPosition(5, -5, 0));
+                            action = goToTarget(VecPosition(5, -5, 0));
                         }
-                        return SKILL_STAND;
                     }
+                    return collisionAvoidance(true /*teammate*/, true/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, action, true/*keepDistance*/);;
                 }
             } else { // defender during attack [7,11]
+                SkillType action;
 
                 if (imClosestToBall) {
                     if (closestDistanceToBall < 0.5) { 
-                        return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+                        action = kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
                     } else { // otherwise walk in the direction of the ball
-                        return goToTarget(ball);
+                        action = goToTarget(ball);
                     }
                 } else {
                     if (unum == 7) {
-                        return goToTarget(VecPosition(0, 0, 0)); 
+                        action = goToTarget(VecPosition(0, 0, 0)); 
                     } else if (unum == 8) {
-                        return goToTarget(VecPosition(0, 5, 0)); 
+                        action = goToTarget(VecPosition(0, 5, 0)); 
                     } else if (unum == 9) {
-                        return goToTarget(VecPosition(0, -5, 0)); 
+                        action = goToTarget(VecPosition(0, -5, 0)); 
                     } else if (unum == 10) {
-                        return goToTarget(VecPosition(0, 10, 0)); 
+                        action = goToTarget(VecPosition(0, 10, 0)); 
                     } else {
-                        return goToTarget(VecPosition(0, -10, 0)); 
+                        action = goToTarget(VecPosition(0, -10, 0)); 
                     }
                 }
+                
+                return collisionAvoidance(true /*teammate*/, true/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, action, true/*keepDistance*/);;
             }
         } else { // we are not in posession of the ball and need to defend
             // TODO Habib you can work on this block
             if (worldModel->getUNum() == 1) { // goalie
-                return goToTarget(VecPosition(-15, 0, 0));
+                 if (imClosestToBall) {
+                    if (closestDistanceToBall < 0.5) { 
+                        return kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+                    } else { // otherwise walk in the direction of the ball
+                        return goToTarget(ball);
+                    }
+                } else {
+                    return goToTarget(VecPosition(-15, 0, 0));
+                }
             } else if (worldModel->getUNum() <= 6) { // attacker
                 
                 if (worldModel->getUNum() == 2) { // striker
