@@ -278,6 +278,7 @@ SkillType NaoBehavior::selectSkill() {
             }
         } else { // we are not in posession of the ball and need to defend
             // TODO Habib you can work on this block
+            cout << "WHAT IS GOING ON" << endl;
             if (worldModel->getUNum() == 1) { // goalie
                  if (imClosestToBall) {
                     if (closestDistanceToBall < 0.5) { 
