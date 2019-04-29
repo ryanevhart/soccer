@@ -132,6 +132,7 @@ SkillType NaoBehavior::selectSkill() {
     cout << playerClosestToBall << endl;
     VecPosition point = VecPosition(-4, 0, 0);
 
+    // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
     bool dontReadCommandFromFile = ourBall && !(unum == 2 || unum == 3 || unum == 4); //2,3,4 are the only agents that read from file rn
     
     if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
@@ -239,46 +240,41 @@ SkillType NaoBehavior::selectSkill() {
                     }
 
                 } else { // assistant attackers
-                    SkillType action;
                     if (imClosestToBall) {
                         if (closestDistanceToBall < 0.5) { 
-                            action = kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+                            return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
                         } else { // otherwise walk in the direction of the ball
-                            action = goToTarget(ball);
+                            return goToTarget(ball);
                         }
                     } else {
                         if (unum == 5) {
-                            action = goToTarget(VecPosition(5, 5, 0));
+                            return goToTarget(VecPosition(5, 5, 0));
                         } else if (unum == 6) {
-                            action = goToTarget(VecPosition(5, -5, 0));
+                            return goToTarget(VecPosition(5, -5, 0));
                         }
                     }
-                    return collisionAvoidance(true /*teammate*/, true/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, action, true/*keepDistance*/);;
                 }
             } else { // defender during attack [7,11]
-                SkillType action;
 
                 if (imClosestToBall) {
                     if (closestDistanceToBall < 0.5) { 
-                        action = kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+                        return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
                     } else { // otherwise walk in the direction of the ball
-                        action = goToTarget(ball);
+                        return goToTarget(ball);
                     }
                 } else {
                     if (unum == 7) {
-                        action = goToTarget(VecPosition(0, 0, 0)); 
+                        return goToTarget(VecPosition(0, 0, 0)); 
                     } else if (unum == 8) {
-                        action = goToTarget(VecPosition(0, 5, 0)); 
+                        return goToTarget(VecPosition(0, 5, 0)); 
                     } else if (unum == 9) {
-                        action = goToTarget(VecPosition(0, -5, 0)); 
+                        return goToTarget(VecPosition(0, -5, 0)); 
                     } else if (unum == 10) {
-                        action = goToTarget(VecPosition(0, 10, 0)); 
+                        return goToTarget(VecPosition(0, 10, 0)); 
                     } else {
-                        action = goToTarget(VecPosition(0, -10, 0)); 
+                        return goToTarget(VecPosition(0, -10, 0)); 
                     }
                 }
-                
-                return collisionAvoidance(true /*teammate*/, true/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, action, true/*keepDistance*/);;
             }
         } else { // we are not in posession of the ball and need to defend
             // TODO Habib you can work on this block
@@ -392,9 +388,6 @@ SkillType NaoBehavior::selectSkill() {
         }      
         // Have closest player kick the ball toward the center
         return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
-        //return SKILL_STAND;
-    } else {
-        
     }
     
 
@@ -410,7 +403,6 @@ SkillType NaoBehavior::selectSkill() {
         rewind(f);
         fread(cont, sizeof(char), size, f);
         fclose(f);
-        // cout << worldModel->getUNum() << ": file contents: " << cont << "| action command = " << cont[0] << endl;
 
         /*
             0 index of file is action id [0:move {tile}|1:shoot|2:pass {member}|3:stand]
