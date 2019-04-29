@@ -129,7 +129,7 @@ SkillType NaoBehavior::selectSkill() {
 
     bool imClosestToBall = playerClosestToBall == worldModel->getUNum();
     bool ourBall = playerClosestToBall <= 11;
-    cout << playerClosestToBall << endl;
+    // cout << playerClosestToBall << endl;
     VecPosition point = VecPosition(-4, 0, 0);
 
     // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
@@ -387,7 +387,11 @@ SkillType NaoBehavior::selectSkill() {
             }
         }      
         // Have closest player kick the ball toward the center
-        return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
+        if (closestDistanceToBall > 0.5) {
+            return goToTarget(ball);
+        } else {
+            return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
+        }
     }
     
 
