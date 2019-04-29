@@ -4,8 +4,12 @@
 #include <cstdlib>
 #include <fcntl.h>
 #include <vector>
+#include <iostream>
 
 extern int agentBodyType;
+
+int pastDefender = -1;
+string formation = "0";
 
 /*
  * Real game beaming.
@@ -129,7 +133,7 @@ SkillType NaoBehavior::selectSkill() {
 
     bool imClosestToBall = playerClosestToBall == worldModel->getUNum();
     bool ourBall = playerClosestToBall <= 11;
-    // cout << playerClosestToBall << endl;
+    cout << playerClosestToBall << endl;
     VecPosition point = VecPosition(-4, 0, 0);
 
     // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
@@ -138,7 +142,7 @@ SkillType NaoBehavior::selectSkill() {
     if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
 
         if (ourBall) {
-
+            cout << "our ball?" << endl;
             if (worldModel->getUNum() == 1) { // goalie
                 if (imClosestToBall) {
                     if (closestDistanceToBall < 0.5) { 
@@ -278,18 +282,64 @@ SkillType NaoBehavior::selectSkill() {
             }
         } else { // we are not in posession of the ball and need to defend
             // TODO Habib you can work on this block
-            cout << "WHAT IS GOING ON" << endl;
-            if (worldModel->getUNum() == 1) { // goalie
-                 if (imClosestToBall) {
-                    if (closestDistanceToBall < 0.5) { 
-                        return kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+
+            // Find closest teammate to ball
+            int teamClosestToBall = -1;
+            double teamClosestDistanceToBall = 10000;
+            for(int i = WO_TEAMMATE1; i <= 11; ++i) {
+                VecPosition temp;
+                int playerNum = i - WO_TEAMMATE1 + 1;
+                if (worldModel->getUNum() == playerNum) {
+                    // This is us
+                    temp = worldModel->getMyPosition();
+                } else {
+                    WorldObject* teammate = worldModel->getWorldObject( i );
+                    if (teammate->validPosition) {
+                        temp = teammate->pos;
+                    } else {
+                        continue;
+                    }
+                }
+                temp.setZ(0);
+
+                double teamDistanceToBall = temp.getDistanceTo(ball);
+
+                if (teamDistanceToBall < teamClosestDistanceToBall && i != pastDefender) {
+                    teamClosestToBall = playerNum;
+                    teamClosestDistanceToBall = teamDistanceToBall;
+
+                    //If the opponent passes the defender then disregard the defender passed when selecting closest to ball.
+                    if(ball.getX() - temp.getX() < -.5 && temp.getX() > -13) {
+                        pastDefender = playerNum;
+                        teamClosestDistanceToBall = 10000;
+                    }
+                }
+            }
+
+
+            //Goalie is closest to ball
+            if (worldModel->getUNum() == 1){
+                VecPosition goaliePos = worldModel->getMyPosition();
+                double distGoalieToBall = goaliePos.getDistanceTo(ball);
+
+                if (teamClosestToBall == 6) {
+                    if (distGoalieToBall < 0.5) { 
+                        return kickBall(KICK_DRIBBLE, VecPosition(15, 0, 0));
                     } else { // otherwise walk in the direction of the ball
                         return goToTarget(ball);
                     }
                 } else {
-                    return goToTarget(VecPosition(-15, 0, 0));
+                    double distance, angle;
+                    getTargetDistanceAndAngle(ball, distance, angle);
+                    double distGoalieToOurGoal = goaliePos.getDistanceTo(VecPosition(-14.3, 0, 0));
+                    if (abs(angle) > 10 and distGoalieToBall < 1) {
+                        return goToTargetRelative(VecPosition(), angle);
+                    } else {
+                        return goToTarget(VecPosition(-14.3, 0, 0));
+                    }
                 }
-            } else if (worldModel->getUNum() <= 6) { // attacker
+            }
+            else if (worldModel->getUNum() <= 6) { // attacker
                 
                 if (worldModel->getUNum() == 2) { // striker
                     return goToTarget(VecPosition(0, 0, 0));
@@ -301,98 +351,183 @@ SkillType NaoBehavior::selectSkill() {
                     return goToTarget(VecPosition(0, -10, 0));
                 } else if (worldModel->getUNum() == 6) { //left far wing
                     return goToTarget(VecPosition(0, 10, 0));
-                } else { // rest
-                    // Move to specified positions around point and face point
-                    VecPosition localPoint = worldModel->g2l(point);
-                    SIM::AngDeg localPointAngle = atan2Deg(localPoint.getY(), localPoint.getX());
+                } else { 
+                    if (teamClosestToBall == worldModel->getUNum()) {
+                        double allClosestDistanceToBall = 10000;
+                        double allPlayerClosestToBall = -1;
 
-                    //If the ball moves behind our front position, move formation backwards
-                    if(ball.getX() <= point.getX()){
-                        point = VecPosition(ball.getX() - 1, point.getY(), 0);
-                    }
-
-                    VecPosition target = point;
-
-                    switch(worldModel->getUNum())
-                    {   
-                        //Top Center Defender
-                        case 7:
-                            target = point;
-
-                            //Failsafe formation, crowd the goal
-                            if(ball.getX() < -9) {
-                                target = VecPosition(-12, 0, 0);
+                        //If opponent is near the ball, dribble towards goal. If not, kick towards goal
+                        for (int i = 11; i <= 22; ++i)
+                        {
+                            VecPosition allTemp;
+                            WorldObject* thisAgent = worldModel->getWorldObject( i );
+                            if (thisAgent->validPosition)
+                            {
+                                allTemp = thisAgent->pos;
                             }
-                            break;
 
-                        //Middle Left Defender
-                        case 8:
-                            target = point - VecPosition(2, -2, 0);
+                            double allDistanceToBall = allTemp.getDistanceTo(ball);
 
-                            //Failsafe formation, crowd the goal
-                            if(ball.getX() < -9) {
-                                target = VecPosition(-13, 1, 0);
-                            }
-                            break;
+                            if(allDistanceToBall < 1.5) {
+                                //May need to change destination
+                                return kickBall(KICK_DRIBBLE, VecPosition(5, 0, 0));
+                            }   
+                        }
 
-                        //Middle Right Defender
-                        case 9:
-                            target = point - VecPosition(2, 2, 0);
-
-                            //Failsafe formation, crowd the goal
-                            if(ball.getX() < -9) {
-                                target = VecPosition(-13, -1, 0);
-                            }
-                            break;
-
-                        //Back Left Defender
-                        case 10:
-                            target = point - VecPosition(4, -3, 0);
-
-                            //Failsafe formation, crowd the goal
-                            if(ball.getX() < -9) {
-                                target = VecPosition(-14, 2, 0);
-                            }
-                            break;
-
-                        //Back Right Defender
-                        case 11:
-                            target = point - VecPosition(4, 3, 0);
-
-                            //Failsafe formation, crowd the goal
-                            if(ball.getX() < -9) {
-                                target = VecPosition(-14, -2, 0);
-                            }
-                            break;
-                        default:
-                            target = point;
-                            break;
+                        //May need to change destination
+                        return kickBall(KICK_FORWARD, VecPosition(5,0,0));
 
                     }
+                    else {
+                        // rest
+                        // Move to specified positions around point and face point
+                        VecPosition localPoint = worldModel->g2l(point);
+                        SIM::AngDeg localPointAngle = atan2Deg(localPoint.getY(), localPoint.getX());
 
-                    // Adjust target to not be too close to teammates
-                    target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
+                        //If the ball moves behind our front position, move formation backwards
+                        if(ball.getX() <= point.getX()){
+                            point = VecPosition(ball.getX() - 1, point.getY(), 0);
+                        }
 
-                    if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
-                        // Close enough to desired position and orientation so just stand
-                        return SKILL_STAND;
-                    } else if (me.getDistanceTo(target) < .5) {
-                        // Close to desired position so start turning to face center
-                        return goToTargetRelative(worldModel->g2l(target), localPointAngle);
-                    } else {
-                        // Move toward target location
-                        return goToTarget(target);
+                        VecPosition target = point;
+
+                        string inferInfoFileName = "inferInfo.txt";
+                        ofstream inferInfoFile(inferInfoFileName.c_str());
+
+                        //Where is the position of the ball?
+                        //0 for center, 1 for left, 2 for right
+                        if(ball.getY() >= 5)
+                            inferInfoFile << "1" << endl;
+                        else if (ball.getY() <= -5)
+                            inferInfoFile << "2" << endl;
+                        else
+                            inferInfoFile << "0" << endl;
+
+                        int leftSideOpp = 0;
+                        int rightSideOpp = 0;
+
+                        //How many agents are on each side?
+                        for (int i = 11; i <= 22; ++i)
+                        {
+                            VecPosition allTemp;
+                            WorldObject* thisAgent = worldModel->getWorldObject( i );
+                            if (thisAgent->validPosition)
+                            {
+                                allTemp = thisAgent->pos;
+                            }
+
+                            if (allTemp.getY() >= 5 && allTemp.getX() <= -4)
+                                leftSideOpp++;
+                            else if (allTemp.getY() <= -5 && allTemp.getX() <= -4)
+                                rightSideOpp++;
+                        }
+
+                        inferInfoFile << leftSideOpp << endl;
+                        inferInfoFile << rightSideOpp << endl;
+
+                        switch(worldModel->getUNum())
+                        {   
+                            //Top Center Defender
+                            case 7:
+                                if(formation == "0")
+                                    target = point; //Center Formation
+                                else if (formation == "1")
+                                    target = point - VecPosition(1, -3, 0); //Left Formation
+                                else if (formation == "2")
+                                    target = point - VecPosition(1, 3, 0); //Right Formation
+
+                                if(ball.getX() < -9) //Failsafe Formation
+                                    target = VecPosition(-12, 0, 0);
+                                break;
+
+                            //Middle Left Defender
+                            case 8:
+                                if(formation == "0")
+                                    target = point - VecPosition(2, -2, 0); // Center Formation
+                                else if (formation == "1")
+                                    target = point - VecPosition(3, -3, 0); //Left Formation
+                                else if (formation == "2")
+                                    target = point - VecPosition(2, 0, 0); //Right Formation
+
+                                if(ball.getX() < -9) //Failsafe Formation
+                                    target = VecPosition(-13, 1, 0);
+                                break;
+
+                            //Middle Right Defender
+                            case 9:
+                                if(formation == "0")
+                                    target = point - VecPosition(2, 2, 0); //Center Formation
+                                else if (formation == "1")
+                                    target = point - VecPosition(2, 0, 0); //Left Formation
+                                else if (formation == "2")
+                                    target = point - VecPosition(3, 3, 0); //Right Formation
+
+                                if(ball.getX() < -9)//Failsafe Formation
+                                    target = VecPosition(-13, -1, 0);
+                                break;
+
+                            //Back Left Defender
+                            case 10:
+                                if(formation == "0")
+                                    target = point - VecPosition(4, -3, 0); //Center Formation
+                                else if (formation == "1")
+                                    target = point - VecPosition(5, -3, 0); //Left Formation
+                                else if (formation == "2")
+                                    target = point - VecPosition(4, 0, 0); //Right Formation
+
+                                if(ball.getX() < -9) //Failsafe Formation
+                                    target = VecPosition(-14, 2, 0);
+                                break;
+
+                            //Back Right Defender
+                            case 11:
+                                if(formation == "0")
+                                    target = point - VecPosition(4, 3, 0); //Center Formation
+                                else if (formation == "1")
+                                    target = point - VecPosition(4, 0, 0);  //Left Formation
+                                else if (formation == "2")
+                                    target = point - VecPosition(5, 3, 0); //Right Formation
+
+                                if(ball.getX() < -9) //Failsafe Formation
+                                    target = VecPosition(-14, -2, 0);
+                                break;
+                            default:
+                                target = point;
+                                break;
+
+                        }
+
+                        // Adjust target to not be too close to teammates
+                        target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
+
+                        if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
+                            // Close enough to desired position and orientation so just stand
+
+                            //system("python inference.py > inferOut.txt");
+
+                            ifstream inferFileOut("inferOut.txt");
+                            inferFileOut >> formation;
+
+                            return SKILL_STAND;
+                        } else if (me.getDistanceTo(target) < .5) {
+                            // Close to desired position so start turning to face center
+
+                            //system("python inference.py > inferOut.txt");
+            
+                            ifstream inferFileOut("inferOut.txt");
+                            inferFileOut >> formation;
+
+                            return goToTargetRelative(worldModel->g2l(target), localPointAngle);
+                        } else {
+                            // Move toward target location
+                            return goToTarget(target);
+                        }           
                     }
-                                
                 }
             }
         }      
         // Have closest player kick the ball toward the center
-        if (closestDistanceToBall > 0.5) {
-            return goToTarget(ball);
-        } else {
-            return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
-        }
+        return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
     }
     
 
