@@ -1,0 +1,8 @@
+(move right ee ef)
+(move right ef eg)
+(move right eg eh)
+(move right eh ei)
+(move right ei fi)
+(move right fi gi)
+(move right gi hi)
+; cost = 7 (unit cost)
