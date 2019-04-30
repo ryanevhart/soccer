@@ -40,9 +40,6 @@ double y_increment = 2 * HALF_FIELD_Y / 9;
 
 // takes the position coordinates and turns it into letter equivalent
 string getMyPosition(double xpos, double ypos) {
-
-    
-
     double i;
     double j;
 
@@ -95,6 +92,23 @@ int close(double x1, double y1, double x2, double y2) {
 }
 
 SkillType NaoBehavior::selectSkill() {
+    /*
+    ifstream ifs ("E:/One\ Drive/OneDrive\ -\ Arizona\ State\ University/School/workspace/final/utaustinvilla3d-group/soccer/%d.lock");
+    if (ifs.is_open()) {
+        // print file:
+        char c = ifs.get();
+        while (ifs.good()) {
+          std::cout << c;
+          c = ifs.get();
+        }
+    }
+    else {
+        // show message:
+        std::cout << "Error opening file";
+    }
+    */
+
+
     int lock_fd;
     char lockfile[50];
     snprintf(lockfile, sizeof(lockfile), "../%d.lock", worldModel->getUNum());
@@ -132,8 +146,7 @@ SkillType NaoBehavior::selectSkill() {
     }
 
     bool imClosestToBall = playerClosestToBall == worldModel->getUNum();
-    bool ourBall = ball.getX() > 0;
-    cout << playerClosestToBall << endl;
+    bool ourBall = ball.getX() >= -3;
     VecPosition point = VecPosition(-4, 0, 0);
 
     // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
@@ -142,7 +155,6 @@ SkillType NaoBehavior::selectSkill() {
     if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
 
         if (ourBall) {
-            // cout << "our ball?" << envdl;
             if (worldModel->getUNum() == 1) { // goalie
                 if (imClosestToBall) {
                     if (closestDistanceToBall < 0.5) { 
@@ -155,7 +167,6 @@ SkillType NaoBehavior::selectSkill() {
                 }
                  
             } else if (worldModel->getUNum() <= 6) { // attacker
-                
                 /*
                     wrapper.py arguments (assumes we're on offense)
                     1 unum-me
@@ -172,7 +183,6 @@ SkillType NaoBehavior::selectSkill() {
                 string rightPos = getMyPosition(worldModel->getWorldObject(4)->pos.getX(), worldModel->getWorldObject(4)->pos.getY());
 
                 if (worldModel->getUNum() == 2) { // striker
-
                     int closeVal = 4;
                     if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(3)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(3)->pos.getY())) {
                         closeVal = closeVal + 2;
@@ -199,7 +209,6 @@ SkillType NaoBehavior::selectSkill() {
 
 
                 } else if (worldModel->getUNum() == 3) { // left wing
-
                     int closeVal = 2;
                     if (close(worldModel->getMyPosition().getX(), worldModel->getWorldObject(2)->pos.getX(), worldModel->getMyPosition().getY(), worldModel->getWorldObject(2)->pos.getY())) {
                         closeVal = closeVal + 4;
@@ -282,7 +291,6 @@ SkillType NaoBehavior::selectSkill() {
             }
         } else { // we are not in posession of the ball and need to defend
             // TODO Habib you can work on this block
-
             // Find closest teammate to ball
             int teamClosestToBall = -1;
             double teamClosestDistanceToBall = 10000;
@@ -322,7 +330,7 @@ SkillType NaoBehavior::selectSkill() {
                 VecPosition goaliePos = worldModel->getMyPosition();
                 double distGoalieToBall = goaliePos.getDistanceTo(ball);
 
-                if (teamClosestToBall == 6) {
+                if (teamClosestToBall == 1) {
                     if (distGoalieToBall < 0.5) { 
                         return kickBall(KICK_DRIBBLE, VecPosition(15, 0, 0));
                     } else { // otherwise walk in the direction of the ball
@@ -340,7 +348,6 @@ SkillType NaoBehavior::selectSkill() {
                 }
             }
             else if (worldModel->getUNum() <= 6) { // attacker
-                
                 if (worldModel->getUNum() == 2) { // striker
                     return goToTarget(VecPosition(0, 0, 0));
                 } else if (worldModel->getUNum() == 3) { // right mid wing
@@ -351,13 +358,14 @@ SkillType NaoBehavior::selectSkill() {
                     return goToTarget(VecPosition(0, -10, 0));
                 } else if (worldModel->getUNum() == 6) { //left far wing
                     return goToTarget(VecPosition(0, 10, 0));
-                } else { 
+                } else {
+
                     if (teamClosestToBall == worldModel->getUNum()) {
                         double allClosestDistanceToBall = 10000;
                         double allPlayerClosestToBall = -1;
 
                         //If opponent is near the ball, dribble towards goal. If not, kick towards goal
-                        for (int i = 11; i <= 22; ++i)
+                        for (int i = 12; i <= 22; ++i)
                         {
                             VecPosition allTemp;
                             WorldObject* thisAgent = worldModel->getWorldObject( i );
@@ -503,7 +511,7 @@ SkillType NaoBehavior::selectSkill() {
                                 snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
                                 system(command);
 
-                                ifstream inferFileOut("defender.soln");
+                                ifstream inferFileOut("../defender.soln");
                                 inferFileOut >> formation;
 
                                 return SKILL_STAND;
@@ -514,7 +522,7 @@ SkillType NaoBehavior::selectSkill() {
                                 snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
                                 system(command);
                 
-                                ifstream inferFileOut("inferOut.txt");
+                                ifstream inferFileOut("../defender.soln");
                                 inferFileOut >> formation;
 
                                 return goToTargetRelative(worldModel->g2l(target), localPointAngle);
@@ -602,7 +610,7 @@ SkillType NaoBehavior::selectSkill() {
 
         return updatedAction;
     } else {
-        // cout << "couldn't find solution file for agent " << unum << "|" << solnFile << endl;
+        //cout << "couldn't find solution file for agent " << unum << "|" << solnFile << endl;
         return SKILL_STAND;
     }
 }

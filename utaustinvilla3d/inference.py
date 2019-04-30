@@ -80,7 +80,7 @@ for i in range(3):
         maxProb = probability
         maxIndex = i
 
-with open('./defender.soln', 'w') as file:
+with open('../defender.soln', 'w') as file:
 	file.write(str(maxIndex))
 	file.close()
 
