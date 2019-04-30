@@ -358,181 +358,180 @@ SkillType NaoBehavior::selectSkill() {
                     return goToTarget(VecPosition(0, -10, 0));
                 } else if (worldModel->getUNum() == 6) { //left far wing
                     return goToTarget(VecPosition(0, 10, 0));
-                } else {
+                } 
+            } else {
+                if (teamClosestToBall == worldModel->getUNum()) {
+                    double allClosestDistanceToBall = 10000;
+                    double allPlayerClosestToBall = -1;
 
-                    if (teamClosestToBall == worldModel->getUNum()) {
-                        double allClosestDistanceToBall = 10000;
-                        double allPlayerClosestToBall = -1;
-
-                        //If opponent is near the ball, dribble towards goal. If not, kick towards goal
-                        for (int i = 12; i <= 22; ++i)
+                    //If opponent is near the ball, dribble towards goal. If not, kick towards goal
+                    for (int i = 12; i <= 22; ++i)
+                    {
+                        VecPosition allTemp;
+                        WorldObject* thisAgent = worldModel->getWorldObject( i );
+                        if (thisAgent->validPosition)
                         {
-                            VecPosition allTemp;
-                            WorldObject* thisAgent = worldModel->getWorldObject( i );
-                            if (thisAgent->validPosition)
-                            {
-                                allTemp = thisAgent->pos;
-                            }
-
-                            double allDistanceToBall = allTemp.getDistanceTo(ball);
-
-                            if(allDistanceToBall < 1.5) {
-                                //May need to change destination
-                                return kickBall(KICK_DRIBBLE, VecPosition(5, 0, 0));
-                            }   
+                            allTemp = thisAgent->pos;
                         }
 
-                        //May need to change destination
-                        return kickBall(KICK_FORWARD, VecPosition(5,0,0));
+                        double allDistanceToBall = allTemp.getDistanceTo(ball);
+
+                        if(allDistanceToBall < 1.5) {
+                            //May need to change destination
+                            return kickBall(KICK_DRIBBLE, VecPosition(5, 0, 0));
+                        }   
+                    }
+
+                    //May need to change destination
+                    return kickBall(KICK_FORWARD, VecPosition(5,0,0));
+
+                }
+                else {
+                    // rest
+                    // Move to specified positions around point and face point
+                    VecPosition localPoint = worldModel->g2l(point);
+                    SIM::AngDeg localPointAngle = atan2Deg(localPoint.getY(), localPoint.getX());
+
+                    //If the ball moves behind our front position, move formation backwards
+                    if(ball.getX() <= point.getX()){
+                        point = VecPosition(ball.getX() - 1, point.getY(), 0);
+                    }
+
+                    VecPosition target = point;
+                    string ballPos = "0";
+
+                    //Where is the position of the ball?
+                    //0 for center, 1 for left, 2 for right
+                    if(ball.getY() >= 5)
+                        ballPos = "1";
+                    else if (ball.getY() <= -5)
+                        ballPos = "2";
+                    else
+                        ballPos = "0";
+
+                    int leftSideOpp = 0;
+                    int rightSideOpp = 0;
+
+                    //How many agents are on each side?
+                    for (int i = 11; i <= 22; ++i)
+                    {
+                        VecPosition allTemp;
+                        WorldObject* thisAgent = worldModel->getWorldObject( i );
+                        if (thisAgent->validPosition)
+                        {
+                            allTemp = thisAgent->pos;
+                        }
+
+                        if (allTemp.getY() >= 5 && allTemp.getX() <= -4)
+                            leftSideOpp++;
+                        else if (allTemp.getY() <= -5 && allTemp.getX() <= -4)
+                            rightSideOpp++;
+                    }
+
+                    switch(worldModel->getUNum())
+                    {   
+                        //Top Center Defender
+                        case 7:
+                            if(formation == "0")
+                                target = point; //Center Formation
+                            else if (formation == "1")
+                                target = point - VecPosition(1, -3, 0); //Left Formation
+                            else if (formation == "2")
+                                target = point - VecPosition(1, 3, 0); //Right Formation
+
+                            if(ball.getX() < -9) //Failsafe Formation
+                                target = VecPosition(-12, 0, 0);
+                            break;
+
+                        //Middle Left Defender
+                        case 8:
+                            if(formation == "0")
+                                target = point - VecPosition(2, -2, 0); // Center Formation
+                            else if (formation == "1")
+                                target = point - VecPosition(3, -3, 0); //Left Formation
+                            else if (formation == "2")
+                                target = point - VecPosition(2, 0, 0); //Right Formation
+
+                            if(ball.getX() < -9) //Failsafe Formation
+                                target = VecPosition(-13, 1, 0);
+                            break;
+
+                        //Middle Right Defender
+                        case 9:
+                            if(formation == "0")
+                                target = point - VecPosition(2, 2, 0); //Center Formation
+                            else if (formation == "1")
+                                target = point - VecPosition(2, 0, 0); //Left Formation
+                            else if (formation == "2")
+                                target = point - VecPosition(3, 3, 0); //Right Formation
+
+                            if(ball.getX() < -9)//Failsafe Formation
+                                target = VecPosition(-13, -1, 0);
+                            break;
+
+                        //Back Left Defender
+                        case 10:
+                            if(formation == "0")
+                                target = point - VecPosition(4, -3, 0); //Center Formation
+                            else if (formation == "1")
+                                target = point - VecPosition(5, -3, 0); //Left Formation
+                            else if (formation == "2")
+                                target = point - VecPosition(4, 0, 0); //Right Formation
+
+                            if(ball.getX() < -9) //Failsafe Formation
+                                target = VecPosition(-14, 2, 0);
+                            break;
+
+                        //Back Right Defender
+                        case 11:
+                            if(formation == "0")
+                                target = point - VecPosition(4, 3, 0); //Center Formation
+                            else if (formation == "1")
+                                target = point - VecPosition(4, 0, 0);  //Left Formation
+                            else if (formation == "2")
+                                target = point - VecPosition(5, 3, 0); //Right Formation
+
+                            if(ball.getX() < -9) //Failsafe Formation
+                                target = VecPosition(-14, -2, 0);
+                            break;
+                        default:
+                            target = point;
+                            break;
 
                     }
-                    else {
-                        // rest
-                        // Move to specified positions around point and face point
-                        VecPosition localPoint = worldModel->g2l(point);
-                        SIM::AngDeg localPointAngle = atan2Deg(localPoint.getY(), localPoint.getX());
 
-                        //If the ball moves behind our front position, move formation backwards
-                        if(ball.getX() <= point.getX()){
-                            point = VecPosition(ball.getX() - 1, point.getY(), 0);
-                        }
+                    // Adjust target to not be too close to teammates
+                    target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
 
-                        VecPosition target = point;
-                        string ballPos = "0";
+                    if (lock_fd > 0) {
+                        if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
+                            // Close enough to desired position and orientation so just stand
 
-                        //Where is the position of the ball?
-                        //0 for center, 1 for left, 2 for right
-                        if(ball.getY() >= 5)
-                            ballPos = "1";
-                        else if (ball.getY() <= -5)
-                            ballPos = "2";
-                        else
-                            ballPos = "0";
+                            char command[200];
+                            snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
+                            system(command);
 
-                        int leftSideOpp = 0;
-                        int rightSideOpp = 0;
+                            ifstream inferFileOut("../defender.soln");
+                            inferFileOut >> formation;
 
-                        //How many agents are on each side?
-                        for (int i = 11; i <= 22; ++i)
-                        {
-                            VecPosition allTemp;
-                            WorldObject* thisAgent = worldModel->getWorldObject( i );
-                            if (thisAgent->validPosition)
-                            {
-                                allTemp = thisAgent->pos;
-                            }
+                            return SKILL_STAND;
+                        } else if (me.getDistanceTo(target) < .5) {
+                            // Close to desired position so start turning to face center
 
-                            if (allTemp.getY() >= 5 && allTemp.getX() <= -4)
-                                leftSideOpp++;
-                            else if (allTemp.getY() <= -5 && allTemp.getX() <= -4)
-                                rightSideOpp++;
-                        }
+                            char command[200];
+                            snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
+                            system(command);
+            
+                            ifstream inferFileOut("../defender.soln");
+                            inferFileOut >> formation;
 
-                        switch(worldModel->getUNum())
-                        {   
-                            //Top Center Defender
-                            case 7:
-                                if(formation == "0")
-                                    target = point; //Center Formation
-                                else if (formation == "1")
-                                    target = point - VecPosition(1, -3, 0); //Left Formation
-                                else if (formation == "2")
-                                    target = point - VecPosition(1, 3, 0); //Right Formation
-
-                                if(ball.getX() < -9) //Failsafe Formation
-                                    target = VecPosition(-12, 0, 0);
-                                break;
-
-                            //Middle Left Defender
-                            case 8:
-                                if(formation == "0")
-                                    target = point - VecPosition(2, -2, 0); // Center Formation
-                                else if (formation == "1")
-                                    target = point - VecPosition(3, -3, 0); //Left Formation
-                                else if (formation == "2")
-                                    target = point - VecPosition(2, 0, 0); //Right Formation
-
-                                if(ball.getX() < -9) //Failsafe Formation
-                                    target = VecPosition(-13, 1, 0);
-                                break;
-
-                            //Middle Right Defender
-                            case 9:
-                                if(formation == "0")
-                                    target = point - VecPosition(2, 2, 0); //Center Formation
-                                else if (formation == "1")
-                                    target = point - VecPosition(2, 0, 0); //Left Formation
-                                else if (formation == "2")
-                                    target = point - VecPosition(3, 3, 0); //Right Formation
-
-                                if(ball.getX() < -9)//Failsafe Formation
-                                    target = VecPosition(-13, -1, 0);
-                                break;
-
-                            //Back Left Defender
-                            case 10:
-                                if(formation == "0")
-                                    target = point - VecPosition(4, -3, 0); //Center Formation
-                                else if (formation == "1")
-                                    target = point - VecPosition(5, -3, 0); //Left Formation
-                                else if (formation == "2")
-                                    target = point - VecPosition(4, 0, 0); //Right Formation
-
-                                if(ball.getX() < -9) //Failsafe Formation
-                                    target = VecPosition(-14, 2, 0);
-                                break;
-
-                            //Back Right Defender
-                            case 11:
-                                if(formation == "0")
-                                    target = point - VecPosition(4, 3, 0); //Center Formation
-                                else if (formation == "1")
-                                    target = point - VecPosition(4, 0, 0);  //Left Formation
-                                else if (formation == "2")
-                                    target = point - VecPosition(5, 3, 0); //Right Formation
-
-                                if(ball.getX() < -9) //Failsafe Formation
-                                    target = VecPosition(-14, -2, 0);
-                                break;
-                            default:
-                                target = point;
-                                break;
-
-                        }
-
-                        // Adjust target to not be too close to teammates
-                        target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
-
-                        if (lock_fd > 0) {
-                            if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
-                                // Close enough to desired position and orientation so just stand
-
-                                char command[200];
-                                snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
-                                system(command);
-
-                                ifstream inferFileOut("../defender.soln");
-                                inferFileOut >> formation;
-
-                                return SKILL_STAND;
-                            } else if (me.getDistanceTo(target) < .5) {
-                                // Close to desired position so start turning to face center
-
-                                char command[200];
-                                snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
-                                system(command);
-                
-                                ifstream inferFileOut("../defender.soln");
-                                inferFileOut >> formation;
-
-                                return goToTargetRelative(worldModel->g2l(target), localPointAngle);
-                            } else {
-                                // Move toward target location
-                                return goToTarget(target);
-                            } 
-                        }
-                                      
+                            return goToTargetRelative(worldModel->g2l(target), localPointAngle);
+                        } else {
+                            // Move toward target location
+                            return goToTarget(target);
+                        } 
                     }
+                                  
                 }
             }
         }      
