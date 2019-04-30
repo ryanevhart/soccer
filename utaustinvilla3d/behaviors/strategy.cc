@@ -544,72 +544,75 @@ SkillType NaoBehavior::selectSkill() {
         return goToTarget(ball);
     }
 
-    FILE* f;
-    if ((f = fopen(solnFile, "r"))) {
-        fseek(f, 0, SEEK_END);
-        size_t size = ftell(f);
-        char* cont = new char[size];
-        rewind(f);
-        fread(cont, sizeof(char), size, f);
-        fclose(f);
+    if (unum == 2 || unum == 3 || unum == 4) {
+        FILE* f;
+        if ((f = fopen(solnFile, "r"))) {
+            fseek(f, 0, SEEK_END);
+            size_t size = ftell(f);
+            char* cont = new char[size];
+            rewind(f);
+            fread(cont, sizeof(char), size, f);
+            fclose(f);
 
-        /*
-            0 index of file is action id [0:move {tile}|1:shoot|2:pass {member}|3:stand]
-        */
+            /*
+                0 index of file is action id [0:move {tile}|1:shoot|2:pass {member}|3:stand]
+            */
 
-        SkillType updatedAction;
-        
-
-        if (cont[0] == '0') {
-            double dest_xval = -HALF_FIELD_X + x_increment * (int(cont[3]) - 97);
-            double dest_yval = HALF_FIELD_Y + -y_increment * (int(cont[2]) - 97);
-            if (imClosestToBall) {
-                updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
-            } else {
-                updatedAction = goToTarget(VecPosition(dest_xval, dest_yval, 0));   
-            }
-            
-            // cout << unum << " move to " << cont[2] << cont[3] << " - (" << dest_xval << "," << dest_yval << ")" << endl;
-        } else if (cont[0] == '1') {
-            cout << unum << " shoot" << endl;
-            updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
-        } else if (cont[0] == '2') {
+            SkillType updatedAction;
             
 
-            int destIndex = -1;
-            if (cont[2] == 's') {
-                destIndex = 2;
-            } else if (cont[2] == 'l') {
-                destIndex = 3;
-            } else if (cont[2] == 'r') {
-                destIndex = 4;
-            } else {
-                cout << "unrecognized pass destination: " << cont[2] << endl;
-            }
-
-            cout << unum << " pass " << cont[2] << ":" << worldModel->getMyPosition() << "|" << worldModel->getWorldObject(destIndex)->pos <<endl;
-
-            if (closestDistanceToBall <= 0.5) {
-                if (destIndex > 0) {
-                    if (worldModel->getMyPosition().getY() > worldModel->getWorldObject(destIndex)->pos.getY()) {
-                        updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
-                    } else {
-                        updatedAction = kickBall(KICK_FORWARD, worldModel->getWorldObject(destIndex)->pos);
-                    }
+            if (cont[0] == '0') {
+                double dest_xval = -HALF_FIELD_X + x_increment * (int(cont[3]) - 97);
+                double dest_yval = HALF_FIELD_Y + -y_increment * (int(cont[2]) - 97);
+                if (imClosestToBall) {
+                    updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+                } else {
+                    updatedAction = goToTarget(VecPosition(dest_xval, dest_yval, 0));   
                 }
                 
-            } else {
-                return goToTarget(ball);
-            }
+                // cout << unum << " move to " << cont[2] << cont[3] << " - (" << dest_xval << "," << dest_yval << ")" << endl;
+            } else if (cont[0] == '1') {
+                cout << unum << " shoot" << endl;
+                updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+            } else if (cont[0] == '2') {
                 
-        } else {
-            updatedAction = SKILL_STAND;
-            cout << "couldn't identify command from file, contents - " << cont << endl;
-        }
 
-        return updatedAction;
-    } else {
-        //cout << "couldn't find solution file for agent " << unum << "|" << solnFile << endl;
-        return SKILL_STAND;
+                int destIndex = -1;
+                if (cont[2] == 's') {
+                    destIndex = 2;
+                } else if (cont[2] == 'l') {
+                    destIndex = 3;
+                } else if (cont[2] == 'r') {
+                    destIndex = 4;
+                } else {
+                    cout << "unrecognized pass destination: " << cont[2] << endl;
+                }
+
+                cout << unum << " pass " << cont[2] << ":" << worldModel->getMyPosition() << "|" << worldModel->getWorldObject(destIndex)->pos <<endl;
+
+                if (closestDistanceToBall <= 0.5) {
+                    if (destIndex > 0) {
+                        if (worldModel->getMyPosition().getY() > worldModel->getWorldObject(destIndex)->pos.getY()) {
+                            updatedAction = kickBall(KICK_FORWARD, VecPosition(15, 0, 0));
+                        } else {
+                            updatedAction = kickBall(KICK_FORWARD, worldModel->getWorldObject(destIndex)->pos);
+                        }
+                    }
+                    
+                } else {
+                    return goToTarget(ball);
+                }
+                    
+            } else {
+                updatedAction = SKILL_STAND;
+                cout << "couldn't identify command from file, contents - " << cont << endl;
+            }
+
+            return updatedAction;
+        } else {
+            //cout << "couldn't find solution file for agent " << unum << "|" << solnFile << endl;
+            return SKILL_STAND;
+        }
     }
+        
 }
