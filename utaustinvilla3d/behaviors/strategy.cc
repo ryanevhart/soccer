@@ -503,7 +503,7 @@ SkillType NaoBehavior::selectSkill() {
                     // Adjust target to not be too close to teammates
                     target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
 
-                    if (lock_fd > 0) {
+                    if (lock_fd > 0 && unum == 7) {
                         if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
                             // Close enough to desired position and orientation so just stand
 
