@@ -10,6 +10,7 @@ import fileinput
 posBall = sys.argv[1]
 leftOpp = sys.argv[2]
 rightOpp = sys.argv[3]
+unum = int(sys.argv[4])
 
 
 vBC = 0
@@ -82,4 +83,7 @@ for i in range(3):
 with open('./defender.soln', 'w') as file:
 	file.write(str(maxIndex))
 	file.close()
-	os.remove("./defend.lock") # remove the lock so the defender knows the output is prepared
+
+lockFile = "../%d.lock" % (unum)
+time.sleep(10) # this python file being kicked off makes all the agents fall, sleep the agents have time to actually excecute their plan
+os.remove(lockFile)

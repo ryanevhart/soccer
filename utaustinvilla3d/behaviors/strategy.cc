@@ -137,12 +137,12 @@ SkillType NaoBehavior::selectSkill() {
     VecPosition point = VecPosition(-4, 0, 0);
 
     // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
-    bool dontReadCommandFromFile = ourBall && !(unum == 2 || unum == 3 || unum == 4); //2,3,4 are the only agents that read from file rn
+    bool dontReadCommandFromFile = !(unum == 2 || unum == 3 || unum == 4); //2,3,4 are the only agents that read from file rn
     
     if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
 
         if (ourBall) {
-            cout << "our ball?" << endl;
+            // cout << "our ball?" << envdl;
             if (worldModel->getUNum() == 1) { // goalie
                 if (imClosestToBall) {
                     if (closestDistanceToBall < 0.5) { 
@@ -495,32 +495,35 @@ SkillType NaoBehavior::selectSkill() {
                         // Adjust target to not be too close to teammates
                         target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
 
-                        if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
-                            // Close enough to desired position and orientation so just stand
+                        if (lock_fd > 0) {
+                            if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
+                                // Close enough to desired position and orientation so just stand
 
-                            char command[200];
-                            snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
-                            system(command);
+                                char command[200];
+                                snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
+                                system(command);
 
-                            ifstream inferFileOut("inferOut.txt");
-                            inferFileOut >> formation;
+                                ifstream inferFileOut("inferOut.txt");
+                                inferFileOut >> formation;
 
-                            return SKILL_STAND;
-                        } else if (me.getDistanceTo(target) < .5) {
-                            // Close to desired position so start turning to face center
+                                return SKILL_STAND;
+                            } else if (me.getDistanceTo(target) < .5) {
+                                // Close to desired position so start turning to face center
 
-                            char command[200];
-                            snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
-                            system(command);
-            
-                            ifstream inferFileOut("inferOut.txt");
-                            inferFileOut >> formation;
+                                char command[200];
+                                snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
+                                system(command);
+                
+                                ifstream inferFileOut("inferOut.txt");
+                                inferFileOut >> formation;
 
-                            return goToTargetRelative(worldModel->g2l(target), localPointAngle);
-                        } else {
-                            // Move toward target location
-                            return goToTarget(target);
-                        }           
+                                return goToTargetRelative(worldModel->g2l(target), localPointAngle);
+                            } else {
+                                // Move toward target location
+                                return goToTarget(target);
+                            } 
+                        }
+                                      
                     }
                 }
             }
