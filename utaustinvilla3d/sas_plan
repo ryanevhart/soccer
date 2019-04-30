@@ -1,7 +1,0 @@
-(move left ee de)
-(move left de ce)
-(move left ce cf)
-(move left cf cg)
-(move left cg ch)
-(move left ch ci)
-; cost = 6 (unit cost)
