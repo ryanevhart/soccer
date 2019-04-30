@@ -19,33 +19,33 @@ except StopIteration:
 
 inferInfo.close()
 
-vLO = 0
-vRO = 0
-vBL = 0
-vBR = 0
-vBC = 0
-
-if posBall == "0":
-	vBC = 1
-	vBL = 0
-	vBR = 0
-elif posBall == "1":
-	vBC = 0
-	vBL = 1
-	vBR = 0
-elif posBall == "2":
-	vBC = 0
-	vBL = 0
-	vBR = 1
-
-if leftOpp >= 3:
-	vLO = 1
-	vRO = 0
-elif rightOpp >= 3:
-	vRO = 1
-	vLO = 0
-
 if runInference == 1:
+	vBC = 0
+	vBR = 0
+	vBL = 0
+	vLO = 0
+	vRO = 0
+
+	if posBall == "0":
+		vBC = 1
+		vBL = 0
+		vBR = 0
+	elif posBall == "1":
+		vBC = 0
+		vBL = 1
+		vBR = 0
+	elif posBall == "2":
+		vBC = 0
+		vBL = 0
+		vBR = 1
+
+	if leftOpp >= "3":
+		vLO = 1
+		vRO = 0
+	elif rightOpp >= "3":
+		vRO = 1
+		vLO = 0
+
 	# Define the model structure (also see the instructions)
 	inference_model = BayesianModel([('LO', 'Goal'),
 	                              ('RO', 'Goal'),
@@ -65,38 +65,9 @@ if runInference == 1:
 	cpd_bc = TabularCPD(variable='BC', variable_card=2,
 	                       values=[[0.5], [0.5]])
 	g_cpd = TabularCPD(variable='Goal', variable_card=3, values=
-							[[.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [0, 0, .5],
-							 [0, 0, .5],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [0, .5, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [0, .5, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.035, 0, 0],
-							 [.055, 0, 0]],
+							[[1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+							 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+							 [0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
 	                        evidence=['LO','RO', 'BL', 'BR', 'BC'],
 	                        evidence_card=[2, 2, 2, 2, 2])
 
@@ -107,4 +78,17 @@ if runInference == 1:
 	from pgmpy.inference import VariableElimination
 	inferOutput = VariableElimination(inference_model)
 
-	print(inferOutput.query(variables=['Goal'], evidence={'LO': vLO, 'RO': vRO, 'BL': vBL, 'BR': vBR, 'BC': vBC})['Goal'])
+	maxProb = 0
+	maxIndex = 0
+
+	for i in range(3):
+	    probability = inferOutput.query(variables=['Goal'], evidence={'LO': vLO, 'RO': vRO, 'BL': vBL, 'BR': vBR, 'BC': vBC})['Goal'].values[i]
+	    if probability > maxProb:
+	        maxProb = probability
+	        maxIndex = i
+	#print(maxIndex)
+
+with open('./defender.soln', 'w') as file:
+	file.write(str(maxIndex))
+	file.close()
+	os.remove("./defend.lock") # remove the lock so the defender knows the output is prepared
