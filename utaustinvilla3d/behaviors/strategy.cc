@@ -108,11 +108,13 @@ SkillType NaoBehavior::selectSkill() {
     }
     */
 
-
-    int lock_fd;
-    char lockfile[50];
-    snprintf(lockfile, sizeof(lockfile), "../%d.lock", worldModel->getUNum());
-    lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    if (unum == 2 || unum == 3 || unum == 4) {
+        int lock_fd;
+        char lockfile[50];
+        snprintf(lockfile, sizeof(lockfile), "../%d.lock", worldModel->getUNum());
+        lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    }
+        
 
     char solnFile[50];
     snprintf(solnFile, sizeof(solnFile), "../%d.soln", worldModel->getUNum());
