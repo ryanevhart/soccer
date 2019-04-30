@@ -10,6 +10,7 @@ import fileinput
 posBall = sys.argv[1]
 leftOpp = sys.argv[2]
 rightOpp = sys.argv[3]
+agentNum = sys.argv[4]
 
 
 vBC = 0

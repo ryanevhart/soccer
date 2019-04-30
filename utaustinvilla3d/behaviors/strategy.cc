@@ -502,7 +502,7 @@ SkillType NaoBehavior::selectSkill() {
                             snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
                             system(command);
 
-                            ifstream inferFileOut("inferOut.txt");
+                            ifstream inferFileOut("defender.soln");
                             inferFileOut >> formation;
 
                             return SKILL_STAND;
@@ -513,7 +513,7 @@ SkillType NaoBehavior::selectSkill() {
                             snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
                             system(command);
             
-                            ifstream inferFileOut("inferOut.txt");
+                            ifstream inferFileOut("defender.soln");
                             inferFileOut >> formation;
 
                             return goToTargetRelative(worldModel->g2l(target), localPointAngle);
