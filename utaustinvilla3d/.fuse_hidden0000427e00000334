@@ -1,0 +1,5162 @@
+begin_version
+3
+end_version
+begin_metric
+0
+end_metric
+1
+begin_variable
+var0
+-1
+100
+Atom at(right, aa)
+Atom at(right, ab)
+Atom at(right, ac)
+Atom at(right, ad)
+Atom at(right, ae)
+Atom at(right, af)
+Atom at(right, ag)
+Atom at(right, ah)
+Atom at(right, ai)
+Atom at(right, aj)
+Atom at(right, ba)
+Atom at(right, bb)
+Atom at(right, bc)
+Atom at(right, bd)
+Atom at(right, be)
+Atom at(right, bf)
+Atom at(right, bg)
+Atom at(right, bh)
+Atom at(right, bi)
+Atom at(right, bj)
+Atom at(right, ca)
+Atom at(right, cb)
+Atom at(right, cc)
+Atom at(right, cd)
+Atom at(right, ce)
+Atom at(right, cf)
+Atom at(right, cg)
+Atom at(right, ch)
+Atom at(right, ci)
+Atom at(right, cj)
+Atom at(right, da)
+Atom at(right, db)
+Atom at(right, dc)
+Atom at(right, dd)
+Atom at(right, de)
+Atom at(right, df)
+Atom at(right, dg)
+Atom at(right, dh)
+Atom at(right, di)
+Atom at(right, dj)
+Atom at(right, ea)
+Atom at(right, eb)
+Atom at(right, ec)
+Atom at(right, ed)
+Atom at(right, ee)
+Atom at(right, ef)
+Atom at(right, eg)
+Atom at(right, eh)
+Atom at(right, ei)
+Atom at(right, ej)
+Atom at(right, fa)
+Atom at(right, fb)
+Atom at(right, fc)
+Atom at(right, fd)
+Atom at(right, fe)
+Atom at(right, ff)
+Atom at(right, fg)
+Atom at(right, fh)
+Atom at(right, fi)
+Atom at(right, fj)
+Atom at(right, ga)
+Atom at(right, gb)
+Atom at(right, gc)
+Atom at(right, gd)
+Atom at(right, ge)
+Atom at(right, gf)
+Atom at(right, gg)
+Atom at(right, gh)
+Atom at(right, gi)
+Atom at(right, gj)
+Atom at(right, ha)
+Atom at(right, hb)
+Atom at(right, hc)
+Atom at(right, hd)
+Atom at(right, he)
+Atom at(right, hf)
+Atom at(right, hg)
+Atom at(right, hh)
+Atom at(right, hi)
+Atom at(right, hj)
+Atom at(right, ia)
+Atom at(right, ib)
+Atom at(right, ic)
+Atom at(right, id)
+Atom at(right, ie)
+Atom at(right, if)
+Atom at(right, ig)
+Atom at(right, ih)
+Atom at(right, ii)
+Atom at(right, ij)
+Atom at(right, ja)
+Atom at(right, jb)
+Atom at(right, jc)
+Atom at(right, jd)
+Atom at(right, je)
+Atom at(right, jf)
+Atom at(right, jg)
+Atom at(right, jh)
+Atom at(right, ji)
+Atom at(right, jj)
+end_variable
+0
+begin_state
+44
+end_state
+begin_goal
+1
+0 78
+end_goal
+720
+begin_operator
+move right aa ab
+0
+1
+0 0 0 1
+1
+end_operator
+begin_operator
+move right aa ab
+0
+1
+0 0 0 1
+1
+end_operator
+begin_operator
+move right aa ba
+0
+1
+0 0 0 10
+1
+end_operator
+begin_operator
+move right aa ba
+0
+1
+0 0 0 10
+1
+end_operator
+begin_operator
+move right ab aa
+0
+1
+0 0 1 0
+1
+end_operator
+begin_operator
+move right ab aa
+0
+1
+0 0 1 0
+1
+end_operator
+begin_operator
+move right ab ac
+0
+1
+0 0 1 2
+1
+end_operator
+begin_operator
+move right ab ac
+0
+1
+0 0 1 2
+1
+end_operator
+begin_operator
+move right ab bb
+0
+1
+0 0 1 11
+1
+end_operator
+begin_operator
+move right ab bb
+0
+1
+0 0 1 11
+1
+end_operator
+begin_operator
+move right ac ab
+0
+1
+0 0 2 1
+1
+end_operator
+begin_operator
+move right ac ab
+0
+1
+0 0 2 1
+1
+end_operator
+begin_operator
+move right ac ad
+0
+1
+0 0 2 3
+1
+end_operator
+begin_operator
+move right ac ad
+0
+1
+0 0 2 3
+1
+end_operator
+begin_operator
+move right ac bc
+0
+1
+0 0 2 12
+1
+end_operator
+begin_operator
+move right ac bc
+0
+1
+0 0 2 12
+1
+end_operator
+begin_operator
+move right ad ac
+0
+1
+0 0 3 2
+1
+end_operator
+begin_operator
+move right ad ac
+0
+1
+0 0 3 2
+1
+end_operator
+begin_operator
+move right ad ae
+0
+1
+0 0 3 4
+1
+end_operator
+begin_operator
+move right ad ae
+0
+1
+0 0 3 4
+1
+end_operator
+begin_operator
+move right ad bd
+0
+1
+0 0 3 13
+1
+end_operator
+begin_operator
+move right ad bd
+0
+1
+0 0 3 13
+1
+end_operator
+begin_operator
+move right ae ad
+0
+1
+0 0 4 3
+1
+end_operator
+begin_operator
+move right ae ad
+0
+1
+0 0 4 3
+1
+end_operator
+begin_operator
+move right ae af
+0
+1
+0 0 4 5
+1
+end_operator
+begin_operator
+move right ae af
+0
+1
+0 0 4 5
+1
+end_operator
+begin_operator
+move right ae be
+0
+1
+0 0 4 14
+1
+end_operator
+begin_operator
+move right ae be
+0
+1
+0 0 4 14
+1
+end_operator
+begin_operator
+move right af ae
+0
+1
+0 0 5 4
+1
+end_operator
+begin_operator
+move right af ae
+0
+1
+0 0 5 4
+1
+end_operator
+begin_operator
+move right af ag
+0
+1
+0 0 5 6
+1
+end_operator
+begin_operator
+move right af ag
+0
+1
+0 0 5 6
+1
+end_operator
+begin_operator
+move right af bf
+0
+1
+0 0 5 15
+1
+end_operator
+begin_operator
+move right af bf
+0
+1
+0 0 5 15
+1
+end_operator
+begin_operator
+move right ag af
+0
+1
+0 0 6 5
+1
+end_operator
+begin_operator
+move right ag af
+0
+1
+0 0 6 5
+1
+end_operator
+begin_operator
+move right ag ah
+0
+1
+0 0 6 7
+1
+end_operator
+begin_operator
+move right ag ah
+0
+1
+0 0 6 7
+1
+end_operator
+begin_operator
+move right ag bg
+0
+1
+0 0 6 16
+1
+end_operator
+begin_operator
+move right ag bg
+0
+1
+0 0 6 16
+1
+end_operator
+begin_operator
+move right ah ag
+0
+1
+0 0 7 6
+1
+end_operator
+begin_operator
+move right ah ag
+0
+1
+0 0 7 6
+1
+end_operator
+begin_operator
+move right ah ai
+0
+1
+0 0 7 8
+1
+end_operator
+begin_operator
+move right ah ai
+0
+1
+0 0 7 8
+1
+end_operator
+begin_operator
+move right ah bh
+0
+1
+0 0 7 17
+1
+end_operator
+begin_operator
+move right ah bh
+0
+1
+0 0 7 17
+1
+end_operator
+begin_operator
+move right ai ah
+0
+1
+0 0 8 7
+1
+end_operator
+begin_operator
+move right ai ah
+0
+1
+0 0 8 7
+1
+end_operator
+begin_operator
+move right ai aj
+0
+1
+0 0 8 9
+1
+end_operator
+begin_operator
+move right ai aj
+0
+1
+0 0 8 9
+1
+end_operator
+begin_operator
+move right ai bi
+0
+1
+0 0 8 18
+1
+end_operator
+begin_operator
+move right ai bi
+0
+1
+0 0 8 18
+1
+end_operator
+begin_operator
+move right aj ai
+0
+1
+0 0 9 8
+1
+end_operator
+begin_operator
+move right aj ai
+0
+1
+0 0 9 8
+1
+end_operator
+begin_operator
+move right aj bj
+0
+1
+0 0 9 19
+1
+end_operator
+begin_operator
+move right aj bj
+0
+1
+0 0 9 19
+1
+end_operator
+begin_operator
+move right ba aa
+0
+1
+0 0 10 0
+1
+end_operator
+begin_operator
+move right ba aa
+0
+1
+0 0 10 0
+1
+end_operator
+begin_operator
+move right ba bb
+0
+1
+0 0 10 11
+1
+end_operator
+begin_operator
+move right ba bb
+0
+1
+0 0 10 11
+1
+end_operator
+begin_operator
+move right ba ca
+0
+1
+0 0 10 20
+1
+end_operator
+begin_operator
+move right ba ca
+0
+1
+0 0 10 20
+1
+end_operator
+begin_operator
+move right bb ab
+0
+1
+0 0 11 1
+1
+end_operator
+begin_operator
+move right bb ab
+0
+1
+0 0 11 1
+1
+end_operator
+begin_operator
+move right bb ba
+0
+1
+0 0 11 10
+1
+end_operator
+begin_operator
+move right bb ba
+0
+1
+0 0 11 10
+1
+end_operator
+begin_operator
+move right bb bc
+0
+1
+0 0 11 12
+1
+end_operator
+begin_operator
+move right bb bc
+0
+1
+0 0 11 12
+1
+end_operator
+begin_operator
+move right bb cb
+0
+1
+0 0 11 21
+1
+end_operator
+begin_operator
+move right bb cb
+0
+1
+0 0 11 21
+1
+end_operator
+begin_operator
+move right bc ac
+0
+1
+0 0 12 2
+1
+end_operator
+begin_operator
+move right bc ac
+0
+1
+0 0 12 2
+1
+end_operator
+begin_operator
+move right bc bb
+0
+1
+0 0 12 11
+1
+end_operator
+begin_operator
+move right bc bb
+0
+1
+0 0 12 11
+1
+end_operator
+begin_operator
+move right bc bd
+0
+1
+0 0 12 13
+1
+end_operator
+begin_operator
+move right bc bd
+0
+1
+0 0 12 13
+1
+end_operator
+begin_operator
+move right bc cc
+0
+1
+0 0 12 22
+1
+end_operator
+begin_operator
+move right bc cc
+0
+1
+0 0 12 22
+1
+end_operator
+begin_operator
+move right bd ad
+0
+1
+0 0 13 3
+1
+end_operator
+begin_operator
+move right bd ad
+0
+1
+0 0 13 3
+1
+end_operator
+begin_operator
+move right bd bc
+0
+1
+0 0 13 12
+1
+end_operator
+begin_operator
+move right bd bc
+0
+1
+0 0 13 12
+1
+end_operator
+begin_operator
+move right bd be
+0
+1
+0 0 13 14
+1
+end_operator
+begin_operator
+move right bd be
+0
+1
+0 0 13 14
+1
+end_operator
+begin_operator
+move right bd cd
+0
+1
+0 0 13 23
+1
+end_operator
+begin_operator
+move right bd cd
+0
+1
+0 0 13 23
+1
+end_operator
+begin_operator
+move right be ae
+0
+1
+0 0 14 4
+1
+end_operator
+begin_operator
+move right be ae
+0
+1
+0 0 14 4
+1
+end_operator
+begin_operator
+move right be bd
+0
+1
+0 0 14 13
+1
+end_operator
+begin_operator
+move right be bd
+0
+1
+0 0 14 13
+1
+end_operator
+begin_operator
+move right be bf
+0
+1
+0 0 14 15
+1
+end_operator
+begin_operator
+move right be bf
+0
+1
+0 0 14 15
+1
+end_operator
+begin_operator
+move right be ce
+0
+1
+0 0 14 24
+1
+end_operator
+begin_operator
+move right be ce
+0
+1
+0 0 14 24
+1
+end_operator
+begin_operator
+move right bf af
+0
+1
+0 0 15 5
+1
+end_operator
+begin_operator
+move right bf af
+0
+1
+0 0 15 5
+1
+end_operator
+begin_operator
+move right bf be
+0
+1
+0 0 15 14
+1
+end_operator
+begin_operator
+move right bf be
+0
+1
+0 0 15 14
+1
+end_operator
+begin_operator
+move right bf bg
+0
+1
+0 0 15 16
+1
+end_operator
+begin_operator
+move right bf bg
+0
+1
+0 0 15 16
+1
+end_operator
+begin_operator
+move right bf cf
+0
+1
+0 0 15 25
+1
+end_operator
+begin_operator
+move right bf cf
+0
+1
+0 0 15 25
+1
+end_operator
+begin_operator
+move right bg ag
+0
+1
+0 0 16 6
+1
+end_operator
+begin_operator
+move right bg ag
+0
+1
+0 0 16 6
+1
+end_operator
+begin_operator
+move right bg bf
+0
+1
+0 0 16 15
+1
+end_operator
+begin_operator
+move right bg bf
+0
+1
+0 0 16 15
+1
+end_operator
+begin_operator
+move right bg bh
+0
+1
+0 0 16 17
+1
+end_operator
+begin_operator
+move right bg bh
+0
+1
+0 0 16 17
+1
+end_operator
+begin_operator
+move right bg cg
+0
+1
+0 0 16 26
+1
+end_operator
+begin_operator
+move right bg cg
+0
+1
+0 0 16 26
+1
+end_operator
+begin_operator
+move right bh ah
+0
+1
+0 0 17 7
+1
+end_operator
+begin_operator
+move right bh ah
+0
+1
+0 0 17 7
+1
+end_operator
+begin_operator
+move right bh bg
+0
+1
+0 0 17 16
+1
+end_operator
+begin_operator
+move right bh bg
+0
+1
+0 0 17 16
+1
+end_operator
+begin_operator
+move right bh bi
+0
+1
+0 0 17 18
+1
+end_operator
+begin_operator
+move right bh bi
+0
+1
+0 0 17 18
+1
+end_operator
+begin_operator
+move right bh ch
+0
+1
+0 0 17 27
+1
+end_operator
+begin_operator
+move right bh ch
+0
+1
+0 0 17 27
+1
+end_operator
+begin_operator
+move right bi ai
+0
+1
+0 0 18 8
+1
+end_operator
+begin_operator
+move right bi ai
+0
+1
+0 0 18 8
+1
+end_operator
+begin_operator
+move right bi bh
+0
+1
+0 0 18 17
+1
+end_operator
+begin_operator
+move right bi bh
+0
+1
+0 0 18 17
+1
+end_operator
+begin_operator
+move right bi bj
+0
+1
+0 0 18 19
+1
+end_operator
+begin_operator
+move right bi bj
+0
+1
+0 0 18 19
+1
+end_operator
+begin_operator
+move right bi ci
+0
+1
+0 0 18 28
+1
+end_operator
+begin_operator
+move right bi ci
+0
+1
+0 0 18 28
+1
+end_operator
+begin_operator
+move right bj aj
+0
+1
+0 0 19 9
+1
+end_operator
+begin_operator
+move right bj aj
+0
+1
+0 0 19 9
+1
+end_operator
+begin_operator
+move right bj bi
+0
+1
+0 0 19 18
+1
+end_operator
+begin_operator
+move right bj bi
+0
+1
+0 0 19 18
+1
+end_operator
+begin_operator
+move right bj cj
+0
+1
+0 0 19 29
+1
+end_operator
+begin_operator
+move right bj cj
+0
+1
+0 0 19 29
+1
+end_operator
+begin_operator
+move right ca ba
+0
+1
+0 0 20 10
+1
+end_operator
+begin_operator
+move right ca ba
+0
+1
+0 0 20 10
+1
+end_operator
+begin_operator
+move right ca cb
+0
+1
+0 0 20 21
+1
+end_operator
+begin_operator
+move right ca cb
+0
+1
+0 0 20 21
+1
+end_operator
+begin_operator
+move right ca da
+0
+1
+0 0 20 30
+1
+end_operator
+begin_operator
+move right ca da
+0
+1
+0 0 20 30
+1
+end_operator
+begin_operator
+move right cb bb
+0
+1
+0 0 21 11
+1
+end_operator
+begin_operator
+move right cb bb
+0
+1
+0 0 21 11
+1
+end_operator
+begin_operator
+move right cb ca
+0
+1
+0 0 21 20
+1
+end_operator
+begin_operator
+move right cb ca
+0
+1
+0 0 21 20
+1
+end_operator
+begin_operator
+move right cb cc
+0
+1
+0 0 21 22
+1
+end_operator
+begin_operator
+move right cb cc
+0
+1
+0 0 21 22
+1
+end_operator
+begin_operator
+move right cb db
+0
+1
+0 0 21 31
+1
+end_operator
+begin_operator
+move right cb db
+0
+1
+0 0 21 31
+1
+end_operator
+begin_operator
+move right cc bc
+0
+1
+0 0 22 12
+1
+end_operator
+begin_operator
+move right cc bc
+0
+1
+0 0 22 12
+1
+end_operator
+begin_operator
+move right cc cb
+0
+1
+0 0 22 21
+1
+end_operator
+begin_operator
+move right cc cb
+0
+1
+0 0 22 21
+1
+end_operator
+begin_operator
+move right cc cd
+0
+1
+0 0 22 23
+1
+end_operator
+begin_operator
+move right cc cd
+0
+1
+0 0 22 23
+1
+end_operator
+begin_operator
+move right cc dc
+0
+1
+0 0 22 32
+1
+end_operator
+begin_operator
+move right cc dc
+0
+1
+0 0 22 32
+1
+end_operator
+begin_operator
+move right cd bd
+0
+1
+0 0 23 13
+1
+end_operator
+begin_operator
+move right cd bd
+0
+1
+0 0 23 13
+1
+end_operator
+begin_operator
+move right cd cc
+0
+1
+0 0 23 22
+1
+end_operator
+begin_operator
+move right cd cc
+0
+1
+0 0 23 22
+1
+end_operator
+begin_operator
+move right cd ce
+0
+1
+0 0 23 24
+1
+end_operator
+begin_operator
+move right cd ce
+0
+1
+0 0 23 24
+1
+end_operator
+begin_operator
+move right cd dd
+0
+1
+0 0 23 33
+1
+end_operator
+begin_operator
+move right cd dd
+0
+1
+0 0 23 33
+1
+end_operator
+begin_operator
+move right ce be
+0
+1
+0 0 24 14
+1
+end_operator
+begin_operator
+move right ce be
+0
+1
+0 0 24 14
+1
+end_operator
+begin_operator
+move right ce cd
+0
+1
+0 0 24 23
+1
+end_operator
+begin_operator
+move right ce cd
+0
+1
+0 0 24 23
+1
+end_operator
+begin_operator
+move right ce cf
+0
+1
+0 0 24 25
+1
+end_operator
+begin_operator
+move right ce cf
+0
+1
+0 0 24 25
+1
+end_operator
+begin_operator
+move right ce de
+0
+1
+0 0 24 34
+1
+end_operator
+begin_operator
+move right ce de
+0
+1
+0 0 24 34
+1
+end_operator
+begin_operator
+move right cf bf
+0
+1
+0 0 25 15
+1
+end_operator
+begin_operator
+move right cf bf
+0
+1
+0 0 25 15
+1
+end_operator
+begin_operator
+move right cf ce
+0
+1
+0 0 25 24
+1
+end_operator
+begin_operator
+move right cf ce
+0
+1
+0 0 25 24
+1
+end_operator
+begin_operator
+move right cf cg
+0
+1
+0 0 25 26
+1
+end_operator
+begin_operator
+move right cf cg
+0
+1
+0 0 25 26
+1
+end_operator
+begin_operator
+move right cf df
+0
+1
+0 0 25 35
+1
+end_operator
+begin_operator
+move right cf df
+0
+1
+0 0 25 35
+1
+end_operator
+begin_operator
+move right cg bg
+0
+1
+0 0 26 16
+1
+end_operator
+begin_operator
+move right cg bg
+0
+1
+0 0 26 16
+1
+end_operator
+begin_operator
+move right cg cf
+0
+1
+0 0 26 25
+1
+end_operator
+begin_operator
+move right cg cf
+0
+1
+0 0 26 25
+1
+end_operator
+begin_operator
+move right cg ch
+0
+1
+0 0 26 27
+1
+end_operator
+begin_operator
+move right cg ch
+0
+1
+0 0 26 27
+1
+end_operator
+begin_operator
+move right cg dg
+0
+1
+0 0 26 36
+1
+end_operator
+begin_operator
+move right cg dg
+0
+1
+0 0 26 36
+1
+end_operator
+begin_operator
+move right ch bh
+0
+1
+0 0 27 17
+1
+end_operator
+begin_operator
+move right ch bh
+0
+1
+0 0 27 17
+1
+end_operator
+begin_operator
+move right ch cg
+0
+1
+0 0 27 26
+1
+end_operator
+begin_operator
+move right ch cg
+0
+1
+0 0 27 26
+1
+end_operator
+begin_operator
+move right ch ci
+0
+1
+0 0 27 28
+1
+end_operator
+begin_operator
+move right ch ci
+0
+1
+0 0 27 28
+1
+end_operator
+begin_operator
+move right ch dh
+0
+1
+0 0 27 37
+1
+end_operator
+begin_operator
+move right ch dh
+0
+1
+0 0 27 37
+1
+end_operator
+begin_operator
+move right ci bi
+0
+1
+0 0 28 18
+1
+end_operator
+begin_operator
+move right ci bi
+0
+1
+0 0 28 18
+1
+end_operator
+begin_operator
+move right ci ch
+0
+1
+0 0 28 27
+1
+end_operator
+begin_operator
+move right ci ch
+0
+1
+0 0 28 27
+1
+end_operator
+begin_operator
+move right ci cj
+0
+1
+0 0 28 29
+1
+end_operator
+begin_operator
+move right ci cj
+0
+1
+0 0 28 29
+1
+end_operator
+begin_operator
+move right ci di
+0
+1
+0 0 28 38
+1
+end_operator
+begin_operator
+move right ci di
+0
+1
+0 0 28 38
+1
+end_operator
+begin_operator
+move right cj bj
+0
+1
+0 0 29 19
+1
+end_operator
+begin_operator
+move right cj bj
+0
+1
+0 0 29 19
+1
+end_operator
+begin_operator
+move right cj ci
+0
+1
+0 0 29 28
+1
+end_operator
+begin_operator
+move right cj ci
+0
+1
+0 0 29 28
+1
+end_operator
+begin_operator
+move right cj dj
+0
+1
+0 0 29 39
+1
+end_operator
+begin_operator
+move right cj dj
+0
+1
+0 0 29 39
+1
+end_operator
+begin_operator
+move right da ca
+0
+1
+0 0 30 20
+1
+end_operator
+begin_operator
+move right da ca
+0
+1
+0 0 30 20
+1
+end_operator
+begin_operator
+move right da db
+0
+1
+0 0 30 31
+1
+end_operator
+begin_operator
+move right da db
+0
+1
+0 0 30 31
+1
+end_operator
+begin_operator
+move right da ea
+0
+1
+0 0 30 40
+1
+end_operator
+begin_operator
+move right da ea
+0
+1
+0 0 30 40
+1
+end_operator
+begin_operator
+move right db cb
+0
+1
+0 0 31 21
+1
+end_operator
+begin_operator
+move right db cb
+0
+1
+0 0 31 21
+1
+end_operator
+begin_operator
+move right db da
+0
+1
+0 0 31 30
+1
+end_operator
+begin_operator
+move right db da
+0
+1
+0 0 31 30
+1
+end_operator
+begin_operator
+move right db dc
+0
+1
+0 0 31 32
+1
+end_operator
+begin_operator
+move right db dc
+0
+1
+0 0 31 32
+1
+end_operator
+begin_operator
+move right db eb
+0
+1
+0 0 31 41
+1
+end_operator
+begin_operator
+move right db eb
+0
+1
+0 0 31 41
+1
+end_operator
+begin_operator
+move right dc cc
+0
+1
+0 0 32 22
+1
+end_operator
+begin_operator
+move right dc cc
+0
+1
+0 0 32 22
+1
+end_operator
+begin_operator
+move right dc db
+0
+1
+0 0 32 31
+1
+end_operator
+begin_operator
+move right dc db
+0
+1
+0 0 32 31
+1
+end_operator
+begin_operator
+move right dc dd
+0
+1
+0 0 32 33
+1
+end_operator
+begin_operator
+move right dc dd
+0
+1
+0 0 32 33
+1
+end_operator
+begin_operator
+move right dc ec
+0
+1
+0 0 32 42
+1
+end_operator
+begin_operator
+move right dc ec
+0
+1
+0 0 32 42
+1
+end_operator
+begin_operator
+move right dd cd
+0
+1
+0 0 33 23
+1
+end_operator
+begin_operator
+move right dd cd
+0
+1
+0 0 33 23
+1
+end_operator
+begin_operator
+move right dd dc
+0
+1
+0 0 33 32
+1
+end_operator
+begin_operator
+move right dd dc
+0
+1
+0 0 33 32
+1
+end_operator
+begin_operator
+move right dd de
+0
+1
+0 0 33 34
+1
+end_operator
+begin_operator
+move right dd de
+0
+1
+0 0 33 34
+1
+end_operator
+begin_operator
+move right dd ed
+0
+1
+0 0 33 43
+1
+end_operator
+begin_operator
+move right dd ed
+0
+1
+0 0 33 43
+1
+end_operator
+begin_operator
+move right de ce
+0
+1
+0 0 34 24
+1
+end_operator
+begin_operator
+move right de ce
+0
+1
+0 0 34 24
+1
+end_operator
+begin_operator
+move right de dd
+0
+1
+0 0 34 33
+1
+end_operator
+begin_operator
+move right de dd
+0
+1
+0 0 34 33
+1
+end_operator
+begin_operator
+move right de df
+0
+1
+0 0 34 35
+1
+end_operator
+begin_operator
+move right de df
+0
+1
+0 0 34 35
+1
+end_operator
+begin_operator
+move right de ee
+0
+1
+0 0 34 44
+1
+end_operator
+begin_operator
+move right de ee
+0
+1
+0 0 34 44
+1
+end_operator
+begin_operator
+move right df cf
+0
+1
+0 0 35 25
+1
+end_operator
+begin_operator
+move right df cf
+0
+1
+0 0 35 25
+1
+end_operator
+begin_operator
+move right df de
+0
+1
+0 0 35 34
+1
+end_operator
+begin_operator
+move right df de
+0
+1
+0 0 35 34
+1
+end_operator
+begin_operator
+move right df dg
+0
+1
+0 0 35 36
+1
+end_operator
+begin_operator
+move right df dg
+0
+1
+0 0 35 36
+1
+end_operator
+begin_operator
+move right df ef
+0
+1
+0 0 35 45
+1
+end_operator
+begin_operator
+move right df ef
+0
+1
+0 0 35 45
+1
+end_operator
+begin_operator
+move right dg cg
+0
+1
+0 0 36 26
+1
+end_operator
+begin_operator
+move right dg cg
+0
+1
+0 0 36 26
+1
+end_operator
+begin_operator
+move right dg df
+0
+1
+0 0 36 35
+1
+end_operator
+begin_operator
+move right dg df
+0
+1
+0 0 36 35
+1
+end_operator
+begin_operator
+move right dg dh
+0
+1
+0 0 36 37
+1
+end_operator
+begin_operator
+move right dg dh
+0
+1
+0 0 36 37
+1
+end_operator
+begin_operator
+move right dg eg
+0
+1
+0 0 36 46
+1
+end_operator
+begin_operator
+move right dg eg
+0
+1
+0 0 36 46
+1
+end_operator
+begin_operator
+move right dh ch
+0
+1
+0 0 37 27
+1
+end_operator
+begin_operator
+move right dh ch
+0
+1
+0 0 37 27
+1
+end_operator
+begin_operator
+move right dh dg
+0
+1
+0 0 37 36
+1
+end_operator
+begin_operator
+move right dh dg
+0
+1
+0 0 37 36
+1
+end_operator
+begin_operator
+move right dh di
+0
+1
+0 0 37 38
+1
+end_operator
+begin_operator
+move right dh di
+0
+1
+0 0 37 38
+1
+end_operator
+begin_operator
+move right dh eh
+0
+1
+0 0 37 47
+1
+end_operator
+begin_operator
+move right dh eh
+0
+1
+0 0 37 47
+1
+end_operator
+begin_operator
+move right di ci
+0
+1
+0 0 38 28
+1
+end_operator
+begin_operator
+move right di ci
+0
+1
+0 0 38 28
+1
+end_operator
+begin_operator
+move right di dh
+0
+1
+0 0 38 37
+1
+end_operator
+begin_operator
+move right di dh
+0
+1
+0 0 38 37
+1
+end_operator
+begin_operator
+move right di dj
+0
+1
+0 0 38 39
+1
+end_operator
+begin_operator
+move right di dj
+0
+1
+0 0 38 39
+1
+end_operator
+begin_operator
+move right di ei
+0
+1
+0 0 38 48
+1
+end_operator
+begin_operator
+move right di ei
+0
+1
+0 0 38 48
+1
+end_operator
+begin_operator
+move right dj cj
+0
+1
+0 0 39 29
+1
+end_operator
+begin_operator
+move right dj cj
+0
+1
+0 0 39 29
+1
+end_operator
+begin_operator
+move right dj di
+0
+1
+0 0 39 38
+1
+end_operator
+begin_operator
+move right dj di
+0
+1
+0 0 39 38
+1
+end_operator
+begin_operator
+move right dj ej
+0
+1
+0 0 39 49
+1
+end_operator
+begin_operator
+move right dj ej
+0
+1
+0 0 39 49
+1
+end_operator
+begin_operator
+move right ea da
+0
+1
+0 0 40 30
+1
+end_operator
+begin_operator
+move right ea da
+0
+1
+0 0 40 30
+1
+end_operator
+begin_operator
+move right ea eb
+0
+1
+0 0 40 41
+1
+end_operator
+begin_operator
+move right ea eb
+0
+1
+0 0 40 41
+1
+end_operator
+begin_operator
+move right ea fa
+0
+1
+0 0 40 50
+1
+end_operator
+begin_operator
+move right ea fa
+0
+1
+0 0 40 50
+1
+end_operator
+begin_operator
+move right eb db
+0
+1
+0 0 41 31
+1
+end_operator
+begin_operator
+move right eb db
+0
+1
+0 0 41 31
+1
+end_operator
+begin_operator
+move right eb ea
+0
+1
+0 0 41 40
+1
+end_operator
+begin_operator
+move right eb ea
+0
+1
+0 0 41 40
+1
+end_operator
+begin_operator
+move right eb ec
+0
+1
+0 0 41 42
+1
+end_operator
+begin_operator
+move right eb ec
+0
+1
+0 0 41 42
+1
+end_operator
+begin_operator
+move right eb fb
+0
+1
+0 0 41 51
+1
+end_operator
+begin_operator
+move right eb fb
+0
+1
+0 0 41 51
+1
+end_operator
+begin_operator
+move right ec dc
+0
+1
+0 0 42 32
+1
+end_operator
+begin_operator
+move right ec dc
+0
+1
+0 0 42 32
+1
+end_operator
+begin_operator
+move right ec eb
+0
+1
+0 0 42 41
+1
+end_operator
+begin_operator
+move right ec eb
+0
+1
+0 0 42 41
+1
+end_operator
+begin_operator
+move right ec ed
+0
+1
+0 0 42 43
+1
+end_operator
+begin_operator
+move right ec ed
+0
+1
+0 0 42 43
+1
+end_operator
+begin_operator
+move right ec fc
+0
+1
+0 0 42 52
+1
+end_operator
+begin_operator
+move right ec fc
+0
+1
+0 0 42 52
+1
+end_operator
+begin_operator
+move right ed dd
+0
+1
+0 0 43 33
+1
+end_operator
+begin_operator
+move right ed dd
+0
+1
+0 0 43 33
+1
+end_operator
+begin_operator
+move right ed ec
+0
+1
+0 0 43 42
+1
+end_operator
+begin_operator
+move right ed ec
+0
+1
+0 0 43 42
+1
+end_operator
+begin_operator
+move right ed ee
+0
+1
+0 0 43 44
+1
+end_operator
+begin_operator
+move right ed ee
+0
+1
+0 0 43 44
+1
+end_operator
+begin_operator
+move right ed fd
+0
+1
+0 0 43 53
+1
+end_operator
+begin_operator
+move right ed fd
+0
+1
+0 0 43 53
+1
+end_operator
+begin_operator
+move right ee de
+0
+1
+0 0 44 34
+1
+end_operator
+begin_operator
+move right ee de
+0
+1
+0 0 44 34
+1
+end_operator
+begin_operator
+move right ee ed
+0
+1
+0 0 44 43
+1
+end_operator
+begin_operator
+move right ee ed
+0
+1
+0 0 44 43
+1
+end_operator
+begin_operator
+move right ee ef
+0
+1
+0 0 44 45
+1
+end_operator
+begin_operator
+move right ee ef
+0
+1
+0 0 44 45
+1
+end_operator
+begin_operator
+move right ee fe
+0
+1
+0 0 44 54
+1
+end_operator
+begin_operator
+move right ee fe
+0
+1
+0 0 44 54
+1
+end_operator
+begin_operator
+move right ef df
+0
+1
+0 0 45 35
+1
+end_operator
+begin_operator
+move right ef df
+0
+1
+0 0 45 35
+1
+end_operator
+begin_operator
+move right ef ee
+0
+1
+0 0 45 44
+1
+end_operator
+begin_operator
+move right ef ee
+0
+1
+0 0 45 44
+1
+end_operator
+begin_operator
+move right ef eg
+0
+1
+0 0 45 46
+1
+end_operator
+begin_operator
+move right ef eg
+0
+1
+0 0 45 46
+1
+end_operator
+begin_operator
+move right ef ff
+0
+1
+0 0 45 55
+1
+end_operator
+begin_operator
+move right ef ff
+0
+1
+0 0 45 55
+1
+end_operator
+begin_operator
+move right eg dg
+0
+1
+0 0 46 36
+1
+end_operator
+begin_operator
+move right eg dg
+0
+1
+0 0 46 36
+1
+end_operator
+begin_operator
+move right eg ef
+0
+1
+0 0 46 45
+1
+end_operator
+begin_operator
+move right eg ef
+0
+1
+0 0 46 45
+1
+end_operator
+begin_operator
+move right eg eh
+0
+1
+0 0 46 47
+1
+end_operator
+begin_operator
+move right eg eh
+0
+1
+0 0 46 47
+1
+end_operator
+begin_operator
+move right eg fg
+0
+1
+0 0 46 56
+1
+end_operator
+begin_operator
+move right eg fg
+0
+1
+0 0 46 56
+1
+end_operator
+begin_operator
+move right eh dh
+0
+1
+0 0 47 37
+1
+end_operator
+begin_operator
+move right eh dh
+0
+1
+0 0 47 37
+1
+end_operator
+begin_operator
+move right eh eg
+0
+1
+0 0 47 46
+1
+end_operator
+begin_operator
+move right eh eg
+0
+1
+0 0 47 46
+1
+end_operator
+begin_operator
+move right eh ei
+0
+1
+0 0 47 48
+1
+end_operator
+begin_operator
+move right eh ei
+0
+1
+0 0 47 48
+1
+end_operator
+begin_operator
+move right eh fh
+0
+1
+0 0 47 57
+1
+end_operator
+begin_operator
+move right eh fh
+0
+1
+0 0 47 57
+1
+end_operator
+begin_operator
+move right ei di
+0
+1
+0 0 48 38
+1
+end_operator
+begin_operator
+move right ei di
+0
+1
+0 0 48 38
+1
+end_operator
+begin_operator
+move right ei eh
+0
+1
+0 0 48 47
+1
+end_operator
+begin_operator
+move right ei eh
+0
+1
+0 0 48 47
+1
+end_operator
+begin_operator
+move right ei ej
+0
+1
+0 0 48 49
+1
+end_operator
+begin_operator
+move right ei ej
+0
+1
+0 0 48 49
+1
+end_operator
+begin_operator
+move right ei fi
+0
+1
+0 0 48 58
+1
+end_operator
+begin_operator
+move right ei fi
+0
+1
+0 0 48 58
+1
+end_operator
+begin_operator
+move right ej dj
+0
+1
+0 0 49 39
+1
+end_operator
+begin_operator
+move right ej dj
+0
+1
+0 0 49 39
+1
+end_operator
+begin_operator
+move right ej ei
+0
+1
+0 0 49 48
+1
+end_operator
+begin_operator
+move right ej ei
+0
+1
+0 0 49 48
+1
+end_operator
+begin_operator
+move right ej fj
+0
+1
+0 0 49 59
+1
+end_operator
+begin_operator
+move right ej fj
+0
+1
+0 0 49 59
+1
+end_operator
+begin_operator
+move right fa ea
+0
+1
+0 0 50 40
+1
+end_operator
+begin_operator
+move right fa ea
+0
+1
+0 0 50 40
+1
+end_operator
+begin_operator
+move right fa fb
+0
+1
+0 0 50 51
+1
+end_operator
+begin_operator
+move right fa fb
+0
+1
+0 0 50 51
+1
+end_operator
+begin_operator
+move right fa ga
+0
+1
+0 0 50 60
+1
+end_operator
+begin_operator
+move right fa ga
+0
+1
+0 0 50 60
+1
+end_operator
+begin_operator
+move right fb eb
+0
+1
+0 0 51 41
+1
+end_operator
+begin_operator
+move right fb eb
+0
+1
+0 0 51 41
+1
+end_operator
+begin_operator
+move right fb fa
+0
+1
+0 0 51 50
+1
+end_operator
+begin_operator
+move right fb fa
+0
+1
+0 0 51 50
+1
+end_operator
+begin_operator
+move right fb fc
+0
+1
+0 0 51 52
+1
+end_operator
+begin_operator
+move right fb fc
+0
+1
+0 0 51 52
+1
+end_operator
+begin_operator
+move right fb gb
+0
+1
+0 0 51 61
+1
+end_operator
+begin_operator
+move right fb gb
+0
+1
+0 0 51 61
+1
+end_operator
+begin_operator
+move right fc ec
+0
+1
+0 0 52 42
+1
+end_operator
+begin_operator
+move right fc ec
+0
+1
+0 0 52 42
+1
+end_operator
+begin_operator
+move right fc fb
+0
+1
+0 0 52 51
+1
+end_operator
+begin_operator
+move right fc fb
+0
+1
+0 0 52 51
+1
+end_operator
+begin_operator
+move right fc fd
+0
+1
+0 0 52 53
+1
+end_operator
+begin_operator
+move right fc fd
+0
+1
+0 0 52 53
+1
+end_operator
+begin_operator
+move right fc gc
+0
+1
+0 0 52 62
+1
+end_operator
+begin_operator
+move right fc gc
+0
+1
+0 0 52 62
+1
+end_operator
+begin_operator
+move right fd ed
+0
+1
+0 0 53 43
+1
+end_operator
+begin_operator
+move right fd ed
+0
+1
+0 0 53 43
+1
+end_operator
+begin_operator
+move right fd fc
+0
+1
+0 0 53 52
+1
+end_operator
+begin_operator
+move right fd fc
+0
+1
+0 0 53 52
+1
+end_operator
+begin_operator
+move right fd fe
+0
+1
+0 0 53 54
+1
+end_operator
+begin_operator
+move right fd fe
+0
+1
+0 0 53 54
+1
+end_operator
+begin_operator
+move right fd gd
+0
+1
+0 0 53 63
+1
+end_operator
+begin_operator
+move right fd gd
+0
+1
+0 0 53 63
+1
+end_operator
+begin_operator
+move right fe ee
+0
+1
+0 0 54 44
+1
+end_operator
+begin_operator
+move right fe ee
+0
+1
+0 0 54 44
+1
+end_operator
+begin_operator
+move right fe fd
+0
+1
+0 0 54 53
+1
+end_operator
+begin_operator
+move right fe fd
+0
+1
+0 0 54 53
+1
+end_operator
+begin_operator
+move right fe ff
+0
+1
+0 0 54 55
+1
+end_operator
+begin_operator
+move right fe ff
+0
+1
+0 0 54 55
+1
+end_operator
+begin_operator
+move right fe ge
+0
+1
+0 0 54 64
+1
+end_operator
+begin_operator
+move right fe ge
+0
+1
+0 0 54 64
+1
+end_operator
+begin_operator
+move right ff ef
+0
+1
+0 0 55 45
+1
+end_operator
+begin_operator
+move right ff ef
+0
+1
+0 0 55 45
+1
+end_operator
+begin_operator
+move right ff fe
+0
+1
+0 0 55 54
+1
+end_operator
+begin_operator
+move right ff fe
+0
+1
+0 0 55 54
+1
+end_operator
+begin_operator
+move right ff fg
+0
+1
+0 0 55 56
+1
+end_operator
+begin_operator
+move right ff fg
+0
+1
+0 0 55 56
+1
+end_operator
+begin_operator
+move right ff gf
+0
+1
+0 0 55 65
+1
+end_operator
+begin_operator
+move right ff gf
+0
+1
+0 0 55 65
+1
+end_operator
+begin_operator
+move right fg eg
+0
+1
+0 0 56 46
+1
+end_operator
+begin_operator
+move right fg eg
+0
+1
+0 0 56 46
+1
+end_operator
+begin_operator
+move right fg ff
+0
+1
+0 0 56 55
+1
+end_operator
+begin_operator
+move right fg ff
+0
+1
+0 0 56 55
+1
+end_operator
+begin_operator
+move right fg fh
+0
+1
+0 0 56 57
+1
+end_operator
+begin_operator
+move right fg fh
+0
+1
+0 0 56 57
+1
+end_operator
+begin_operator
+move right fg gg
+0
+1
+0 0 56 66
+1
+end_operator
+begin_operator
+move right fg gg
+0
+1
+0 0 56 66
+1
+end_operator
+begin_operator
+move right fh eh
+0
+1
+0 0 57 47
+1
+end_operator
+begin_operator
+move right fh eh
+0
+1
+0 0 57 47
+1
+end_operator
+begin_operator
+move right fh fg
+0
+1
+0 0 57 56
+1
+end_operator
+begin_operator
+move right fh fg
+0
+1
+0 0 57 56
+1
+end_operator
+begin_operator
+move right fh fi
+0
+1
+0 0 57 58
+1
+end_operator
+begin_operator
+move right fh fi
+0
+1
+0 0 57 58
+1
+end_operator
+begin_operator
+move right fh gh
+0
+1
+0 0 57 67
+1
+end_operator
+begin_operator
+move right fh gh
+0
+1
+0 0 57 67
+1
+end_operator
+begin_operator
+move right fi ei
+0
+1
+0 0 58 48
+1
+end_operator
+begin_operator
+move right fi ei
+0
+1
+0 0 58 48
+1
+end_operator
+begin_operator
+move right fi fh
+0
+1
+0 0 58 57
+1
+end_operator
+begin_operator
+move right fi fh
+0
+1
+0 0 58 57
+1
+end_operator
+begin_operator
+move right fi fj
+0
+1
+0 0 58 59
+1
+end_operator
+begin_operator
+move right fi fj
+0
+1
+0 0 58 59
+1
+end_operator
+begin_operator
+move right fi gi
+0
+1
+0 0 58 68
+1
+end_operator
+begin_operator
+move right fi gi
+0
+1
+0 0 58 68
+1
+end_operator
+begin_operator
+move right fj ej
+0
+1
+0 0 59 49
+1
+end_operator
+begin_operator
+move right fj ej
+0
+1
+0 0 59 49
+1
+end_operator
+begin_operator
+move right fj fi
+0
+1
+0 0 59 58
+1
+end_operator
+begin_operator
+move right fj fi
+0
+1
+0 0 59 58
+1
+end_operator
+begin_operator
+move right fj gj
+0
+1
+0 0 59 69
+1
+end_operator
+begin_operator
+move right fj gj
+0
+1
+0 0 59 69
+1
+end_operator
+begin_operator
+move right ga fa
+0
+1
+0 0 60 50
+1
+end_operator
+begin_operator
+move right ga fa
+0
+1
+0 0 60 50
+1
+end_operator
+begin_operator
+move right ga gb
+0
+1
+0 0 60 61
+1
+end_operator
+begin_operator
+move right ga gb
+0
+1
+0 0 60 61
+1
+end_operator
+begin_operator
+move right ga ha
+0
+1
+0 0 60 70
+1
+end_operator
+begin_operator
+move right ga ha
+0
+1
+0 0 60 70
+1
+end_operator
+begin_operator
+move right gb fb
+0
+1
+0 0 61 51
+1
+end_operator
+begin_operator
+move right gb fb
+0
+1
+0 0 61 51
+1
+end_operator
+begin_operator
+move right gb ga
+0
+1
+0 0 61 60
+1
+end_operator
+begin_operator
+move right gb ga
+0
+1
+0 0 61 60
+1
+end_operator
+begin_operator
+move right gb gc
+0
+1
+0 0 61 62
+1
+end_operator
+begin_operator
+move right gb gc
+0
+1
+0 0 61 62
+1
+end_operator
+begin_operator
+move right gb hb
+0
+1
+0 0 61 71
+1
+end_operator
+begin_operator
+move right gb hb
+0
+1
+0 0 61 71
+1
+end_operator
+begin_operator
+move right gc fc
+0
+1
+0 0 62 52
+1
+end_operator
+begin_operator
+move right gc fc
+0
+1
+0 0 62 52
+1
+end_operator
+begin_operator
+move right gc gb
+0
+1
+0 0 62 61
+1
+end_operator
+begin_operator
+move right gc gb
+0
+1
+0 0 62 61
+1
+end_operator
+begin_operator
+move right gc gd
+0
+1
+0 0 62 63
+1
+end_operator
+begin_operator
+move right gc gd
+0
+1
+0 0 62 63
+1
+end_operator
+begin_operator
+move right gc hc
+0
+1
+0 0 62 72
+1
+end_operator
+begin_operator
+move right gc hc
+0
+1
+0 0 62 72
+1
+end_operator
+begin_operator
+move right gd fd
+0
+1
+0 0 63 53
+1
+end_operator
+begin_operator
+move right gd fd
+0
+1
+0 0 63 53
+1
+end_operator
+begin_operator
+move right gd gc
+0
+1
+0 0 63 62
+1
+end_operator
+begin_operator
+move right gd gc
+0
+1
+0 0 63 62
+1
+end_operator
+begin_operator
+move right gd ge
+0
+1
+0 0 63 64
+1
+end_operator
+begin_operator
+move right gd ge
+0
+1
+0 0 63 64
+1
+end_operator
+begin_operator
+move right gd hd
+0
+1
+0 0 63 73
+1
+end_operator
+begin_operator
+move right gd hd
+0
+1
+0 0 63 73
+1
+end_operator
+begin_operator
+move right ge fe
+0
+1
+0 0 64 54
+1
+end_operator
+begin_operator
+move right ge fe
+0
+1
+0 0 64 54
+1
+end_operator
+begin_operator
+move right ge gd
+0
+1
+0 0 64 63
+1
+end_operator
+begin_operator
+move right ge gd
+0
+1
+0 0 64 63
+1
+end_operator
+begin_operator
+move right ge gf
+0
+1
+0 0 64 65
+1
+end_operator
+begin_operator
+move right ge gf
+0
+1
+0 0 64 65
+1
+end_operator
+begin_operator
+move right ge he
+0
+1
+0 0 64 74
+1
+end_operator
+begin_operator
+move right ge he
+0
+1
+0 0 64 74
+1
+end_operator
+begin_operator
+move right gf ff
+0
+1
+0 0 65 55
+1
+end_operator
+begin_operator
+move right gf ff
+0
+1
+0 0 65 55
+1
+end_operator
+begin_operator
+move right gf ge
+0
+1
+0 0 65 64
+1
+end_operator
+begin_operator
+move right gf ge
+0
+1
+0 0 65 64
+1
+end_operator
+begin_operator
+move right gf gg
+0
+1
+0 0 65 66
+1
+end_operator
+begin_operator
+move right gf gg
+0
+1
+0 0 65 66
+1
+end_operator
+begin_operator
+move right gf hf
+0
+1
+0 0 65 75
+1
+end_operator
+begin_operator
+move right gf hf
+0
+1
+0 0 65 75
+1
+end_operator
+begin_operator
+move right gg fg
+0
+1
+0 0 66 56
+1
+end_operator
+begin_operator
+move right gg fg
+0
+1
+0 0 66 56
+1
+end_operator
+begin_operator
+move right gg gf
+0
+1
+0 0 66 65
+1
+end_operator
+begin_operator
+move right gg gf
+0
+1
+0 0 66 65
+1
+end_operator
+begin_operator
+move right gg gh
+0
+1
+0 0 66 67
+1
+end_operator
+begin_operator
+move right gg gh
+0
+1
+0 0 66 67
+1
+end_operator
+begin_operator
+move right gg hg
+0
+1
+0 0 66 76
+1
+end_operator
+begin_operator
+move right gg hg
+0
+1
+0 0 66 76
+1
+end_operator
+begin_operator
+move right gh fh
+0
+1
+0 0 67 57
+1
+end_operator
+begin_operator
+move right gh fh
+0
+1
+0 0 67 57
+1
+end_operator
+begin_operator
+move right gh gg
+0
+1
+0 0 67 66
+1
+end_operator
+begin_operator
+move right gh gg
+0
+1
+0 0 67 66
+1
+end_operator
+begin_operator
+move right gh gi
+0
+1
+0 0 67 68
+1
+end_operator
+begin_operator
+move right gh gi
+0
+1
+0 0 67 68
+1
+end_operator
+begin_operator
+move right gh hh
+0
+1
+0 0 67 77
+1
+end_operator
+begin_operator
+move right gh hh
+0
+1
+0 0 67 77
+1
+end_operator
+begin_operator
+move right gi fi
+0
+1
+0 0 68 58
+1
+end_operator
+begin_operator
+move right gi fi
+0
+1
+0 0 68 58
+1
+end_operator
+begin_operator
+move right gi gh
+0
+1
+0 0 68 67
+1
+end_operator
+begin_operator
+move right gi gh
+0
+1
+0 0 68 67
+1
+end_operator
+begin_operator
+move right gi gj
+0
+1
+0 0 68 69
+1
+end_operator
+begin_operator
+move right gi gj
+0
+1
+0 0 68 69
+1
+end_operator
+begin_operator
+move right gi hi
+0
+1
+0 0 68 78
+1
+end_operator
+begin_operator
+move right gi hi
+0
+1
+0 0 68 78
+1
+end_operator
+begin_operator
+move right gj fj
+0
+1
+0 0 69 59
+1
+end_operator
+begin_operator
+move right gj fj
+0
+1
+0 0 69 59
+1
+end_operator
+begin_operator
+move right gj gi
+0
+1
+0 0 69 68
+1
+end_operator
+begin_operator
+move right gj gi
+0
+1
+0 0 69 68
+1
+end_operator
+begin_operator
+move right gj hj
+0
+1
+0 0 69 79
+1
+end_operator
+begin_operator
+move right gj hj
+0
+1
+0 0 69 79
+1
+end_operator
+begin_operator
+move right ha ga
+0
+1
+0 0 70 60
+1
+end_operator
+begin_operator
+move right ha ga
+0
+1
+0 0 70 60
+1
+end_operator
+begin_operator
+move right ha hb
+0
+1
+0 0 70 71
+1
+end_operator
+begin_operator
+move right ha hb
+0
+1
+0 0 70 71
+1
+end_operator
+begin_operator
+move right ha ia
+0
+1
+0 0 70 80
+1
+end_operator
+begin_operator
+move right ha ia
+0
+1
+0 0 70 80
+1
+end_operator
+begin_operator
+move right hb gb
+0
+1
+0 0 71 61
+1
+end_operator
+begin_operator
+move right hb gb
+0
+1
+0 0 71 61
+1
+end_operator
+begin_operator
+move right hb ha
+0
+1
+0 0 71 70
+1
+end_operator
+begin_operator
+move right hb ha
+0
+1
+0 0 71 70
+1
+end_operator
+begin_operator
+move right hb hc
+0
+1
+0 0 71 72
+1
+end_operator
+begin_operator
+move right hb hc
+0
+1
+0 0 71 72
+1
+end_operator
+begin_operator
+move right hb ib
+0
+1
+0 0 71 81
+1
+end_operator
+begin_operator
+move right hb ib
+0
+1
+0 0 71 81
+1
+end_operator
+begin_operator
+move right hc gc
+0
+1
+0 0 72 62
+1
+end_operator
+begin_operator
+move right hc gc
+0
+1
+0 0 72 62
+1
+end_operator
+begin_operator
+move right hc hb
+0
+1
+0 0 72 71
+1
+end_operator
+begin_operator
+move right hc hb
+0
+1
+0 0 72 71
+1
+end_operator
+begin_operator
+move right hc hd
+0
+1
+0 0 72 73
+1
+end_operator
+begin_operator
+move right hc hd
+0
+1
+0 0 72 73
+1
+end_operator
+begin_operator
+move right hc ic
+0
+1
+0 0 72 82
+1
+end_operator
+begin_operator
+move right hc ic
+0
+1
+0 0 72 82
+1
+end_operator
+begin_operator
+move right hd gd
+0
+1
+0 0 73 63
+1
+end_operator
+begin_operator
+move right hd gd
+0
+1
+0 0 73 63
+1
+end_operator
+begin_operator
+move right hd hc
+0
+1
+0 0 73 72
+1
+end_operator
+begin_operator
+move right hd hc
+0
+1
+0 0 73 72
+1
+end_operator
+begin_operator
+move right hd he
+0
+1
+0 0 73 74
+1
+end_operator
+begin_operator
+move right hd he
+0
+1
+0 0 73 74
+1
+end_operator
+begin_operator
+move right hd id
+0
+1
+0 0 73 83
+1
+end_operator
+begin_operator
+move right hd id
+0
+1
+0 0 73 83
+1
+end_operator
+begin_operator
+move right he ge
+0
+1
+0 0 74 64
+1
+end_operator
+begin_operator
+move right he ge
+0
+1
+0 0 74 64
+1
+end_operator
+begin_operator
+move right he hd
+0
+1
+0 0 74 73
+1
+end_operator
+begin_operator
+move right he hd
+0
+1
+0 0 74 73
+1
+end_operator
+begin_operator
+move right he hf
+0
+1
+0 0 74 75
+1
+end_operator
+begin_operator
+move right he hf
+0
+1
+0 0 74 75
+1
+end_operator
+begin_operator
+move right he ie
+0
+1
+0 0 74 84
+1
+end_operator
+begin_operator
+move right he ie
+0
+1
+0 0 74 84
+1
+end_operator
+begin_operator
+move right hf gf
+0
+1
+0 0 75 65
+1
+end_operator
+begin_operator
+move right hf gf
+0
+1
+0 0 75 65
+1
+end_operator
+begin_operator
+move right hf he
+0
+1
+0 0 75 74
+1
+end_operator
+begin_operator
+move right hf he
+0
+1
+0 0 75 74
+1
+end_operator
+begin_operator
+move right hf hg
+0
+1
+0 0 75 76
+1
+end_operator
+begin_operator
+move right hf hg
+0
+1
+0 0 75 76
+1
+end_operator
+begin_operator
+move right hf if
+0
+1
+0 0 75 85
+1
+end_operator
+begin_operator
+move right hf if
+0
+1
+0 0 75 85
+1
+end_operator
+begin_operator
+move right hg gg
+0
+1
+0 0 76 66
+1
+end_operator
+begin_operator
+move right hg gg
+0
+1
+0 0 76 66
+1
+end_operator
+begin_operator
+move right hg hf
+0
+1
+0 0 76 75
+1
+end_operator
+begin_operator
+move right hg hf
+0
+1
+0 0 76 75
+1
+end_operator
+begin_operator
+move right hg hh
+0
+1
+0 0 76 77
+1
+end_operator
+begin_operator
+move right hg hh
+0
+1
+0 0 76 77
+1
+end_operator
+begin_operator
+move right hg ig
+0
+1
+0 0 76 86
+1
+end_operator
+begin_operator
+move right hg ig
+0
+1
+0 0 76 86
+1
+end_operator
+begin_operator
+move right hh gh
+0
+1
+0 0 77 67
+1
+end_operator
+begin_operator
+move right hh gh
+0
+1
+0 0 77 67
+1
+end_operator
+begin_operator
+move right hh hg
+0
+1
+0 0 77 76
+1
+end_operator
+begin_operator
+move right hh hg
+0
+1
+0 0 77 76
+1
+end_operator
+begin_operator
+move right hh hi
+0
+1
+0 0 77 78
+1
+end_operator
+begin_operator
+move right hh hi
+0
+1
+0 0 77 78
+1
+end_operator
+begin_operator
+move right hh ih
+0
+1
+0 0 77 87
+1
+end_operator
+begin_operator
+move right hh ih
+0
+1
+0 0 77 87
+1
+end_operator
+begin_operator
+move right hi gi
+0
+1
+0 0 78 68
+1
+end_operator
+begin_operator
+move right hi gi
+0
+1
+0 0 78 68
+1
+end_operator
+begin_operator
+move right hi hh
+0
+1
+0 0 78 77
+1
+end_operator
+begin_operator
+move right hi hh
+0
+1
+0 0 78 77
+1
+end_operator
+begin_operator
+move right hi hj
+0
+1
+0 0 78 79
+1
+end_operator
+begin_operator
+move right hi hj
+0
+1
+0 0 78 79
+1
+end_operator
+begin_operator
+move right hi ii
+0
+1
+0 0 78 88
+1
+end_operator
+begin_operator
+move right hi ii
+0
+1
+0 0 78 88
+1
+end_operator
+begin_operator
+move right hj gj
+0
+1
+0 0 79 69
+1
+end_operator
+begin_operator
+move right hj gj
+0
+1
+0 0 79 69
+1
+end_operator
+begin_operator
+move right hj hi
+0
+1
+0 0 79 78
+1
+end_operator
+begin_operator
+move right hj hi
+0
+1
+0 0 79 78
+1
+end_operator
+begin_operator
+move right hj ij
+0
+1
+0 0 79 89
+1
+end_operator
+begin_operator
+move right hj ij
+0
+1
+0 0 79 89
+1
+end_operator
+begin_operator
+move right ia ha
+0
+1
+0 0 80 70
+1
+end_operator
+begin_operator
+move right ia ha
+0
+1
+0 0 80 70
+1
+end_operator
+begin_operator
+move right ia ib
+0
+1
+0 0 80 81
+1
+end_operator
+begin_operator
+move right ia ib
+0
+1
+0 0 80 81
+1
+end_operator
+begin_operator
+move right ia ja
+0
+1
+0 0 80 90
+1
+end_operator
+begin_operator
+move right ia ja
+0
+1
+0 0 80 90
+1
+end_operator
+begin_operator
+move right ib hb
+0
+1
+0 0 81 71
+1
+end_operator
+begin_operator
+move right ib hb
+0
+1
+0 0 81 71
+1
+end_operator
+begin_operator
+move right ib ia
+0
+1
+0 0 81 80
+1
+end_operator
+begin_operator
+move right ib ia
+0
+1
+0 0 81 80
+1
+end_operator
+begin_operator
+move right ib ic
+0
+1
+0 0 81 82
+1
+end_operator
+begin_operator
+move right ib ic
+0
+1
+0 0 81 82
+1
+end_operator
+begin_operator
+move right ib jb
+0
+1
+0 0 81 91
+1
+end_operator
+begin_operator
+move right ib jb
+0
+1
+0 0 81 91
+1
+end_operator
+begin_operator
+move right ic hc
+0
+1
+0 0 82 72
+1
+end_operator
+begin_operator
+move right ic hc
+0
+1
+0 0 82 72
+1
+end_operator
+begin_operator
+move right ic ib
+0
+1
+0 0 82 81
+1
+end_operator
+begin_operator
+move right ic ib
+0
+1
+0 0 82 81
+1
+end_operator
+begin_operator
+move right ic id
+0
+1
+0 0 82 83
+1
+end_operator
+begin_operator
+move right ic id
+0
+1
+0 0 82 83
+1
+end_operator
+begin_operator
+move right ic jc
+0
+1
+0 0 82 92
+1
+end_operator
+begin_operator
+move right ic jc
+0
+1
+0 0 82 92
+1
+end_operator
+begin_operator
+move right id hd
+0
+1
+0 0 83 73
+1
+end_operator
+begin_operator
+move right id hd
+0
+1
+0 0 83 73
+1
+end_operator
+begin_operator
+move right id ic
+0
+1
+0 0 83 82
+1
+end_operator
+begin_operator
+move right id ic
+0
+1
+0 0 83 82
+1
+end_operator
+begin_operator
+move right id ie
+0
+1
+0 0 83 84
+1
+end_operator
+begin_operator
+move right id ie
+0
+1
+0 0 83 84
+1
+end_operator
+begin_operator
+move right id jd
+0
+1
+0 0 83 93
+1
+end_operator
+begin_operator
+move right id jd
+0
+1
+0 0 83 93
+1
+end_operator
+begin_operator
+move right ie he
+0
+1
+0 0 84 74
+1
+end_operator
+begin_operator
+move right ie he
+0
+1
+0 0 84 74
+1
+end_operator
+begin_operator
+move right ie id
+0
+1
+0 0 84 83
+1
+end_operator
+begin_operator
+move right ie id
+0
+1
+0 0 84 83
+1
+end_operator
+begin_operator
+move right ie if
+0
+1
+0 0 84 85
+1
+end_operator
+begin_operator
+move right ie if
+0
+1
+0 0 84 85
+1
+end_operator
+begin_operator
+move right ie je
+0
+1
+0 0 84 94
+1
+end_operator
+begin_operator
+move right ie je
+0
+1
+0 0 84 94
+1
+end_operator
+begin_operator
+move right if hf
+0
+1
+0 0 85 75
+1
+end_operator
+begin_operator
+move right if hf
+0
+1
+0 0 85 75
+1
+end_operator
+begin_operator
+move right if ie
+0
+1
+0 0 85 84
+1
+end_operator
+begin_operator
+move right if ie
+0
+1
+0 0 85 84
+1
+end_operator
+begin_operator
+move right if ig
+0
+1
+0 0 85 86
+1
+end_operator
+begin_operator
+move right if ig
+0
+1
+0 0 85 86
+1
+end_operator
+begin_operator
+move right if jf
+0
+1
+0 0 85 95
+1
+end_operator
+begin_operator
+move right if jf
+0
+1
+0 0 85 95
+1
+end_operator
+begin_operator
+move right ig hg
+0
+1
+0 0 86 76
+1
+end_operator
+begin_operator
+move right ig hg
+0
+1
+0 0 86 76
+1
+end_operator
+begin_operator
+move right ig if
+0
+1
+0 0 86 85
+1
+end_operator
+begin_operator
+move right ig if
+0
+1
+0 0 86 85
+1
+end_operator
+begin_operator
+move right ig ih
+0
+1
+0 0 86 87
+1
+end_operator
+begin_operator
+move right ig ih
+0
+1
+0 0 86 87
+1
+end_operator
+begin_operator
+move right ig jg
+0
+1
+0 0 86 96
+1
+end_operator
+begin_operator
+move right ig jg
+0
+1
+0 0 86 96
+1
+end_operator
+begin_operator
+move right ih hh
+0
+1
+0 0 87 77
+1
+end_operator
+begin_operator
+move right ih hh
+0
+1
+0 0 87 77
+1
+end_operator
+begin_operator
+move right ih ig
+0
+1
+0 0 87 86
+1
+end_operator
+begin_operator
+move right ih ig
+0
+1
+0 0 87 86
+1
+end_operator
+begin_operator
+move right ih ii
+0
+1
+0 0 87 88
+1
+end_operator
+begin_operator
+move right ih ii
+0
+1
+0 0 87 88
+1
+end_operator
+begin_operator
+move right ih jh
+0
+1
+0 0 87 97
+1
+end_operator
+begin_operator
+move right ih jh
+0
+1
+0 0 87 97
+1
+end_operator
+begin_operator
+move right ii hi
+0
+1
+0 0 88 78
+1
+end_operator
+begin_operator
+move right ii hi
+0
+1
+0 0 88 78
+1
+end_operator
+begin_operator
+move right ii ih
+0
+1
+0 0 88 87
+1
+end_operator
+begin_operator
+move right ii ih
+0
+1
+0 0 88 87
+1
+end_operator
+begin_operator
+move right ii ij
+0
+1
+0 0 88 89
+1
+end_operator
+begin_operator
+move right ii ij
+0
+1
+0 0 88 89
+1
+end_operator
+begin_operator
+move right ii ji
+0
+1
+0 0 88 98
+1
+end_operator
+begin_operator
+move right ii ji
+0
+1
+0 0 88 98
+1
+end_operator
+begin_operator
+move right ij hj
+0
+1
+0 0 89 79
+1
+end_operator
+begin_operator
+move right ij hj
+0
+1
+0 0 89 79
+1
+end_operator
+begin_operator
+move right ij ii
+0
+1
+0 0 89 88
+1
+end_operator
+begin_operator
+move right ij ii
+0
+1
+0 0 89 88
+1
+end_operator
+begin_operator
+move right ij jj
+0
+1
+0 0 89 99
+1
+end_operator
+begin_operator
+move right ij jj
+0
+1
+0 0 89 99
+1
+end_operator
+begin_operator
+move right ja ia
+0
+1
+0 0 90 80
+1
+end_operator
+begin_operator
+move right ja ia
+0
+1
+0 0 90 80
+1
+end_operator
+begin_operator
+move right ja jb
+0
+1
+0 0 90 91
+1
+end_operator
+begin_operator
+move right ja jb
+0
+1
+0 0 90 91
+1
+end_operator
+begin_operator
+move right jb ib
+0
+1
+0 0 91 81
+1
+end_operator
+begin_operator
+move right jb ib
+0
+1
+0 0 91 81
+1
+end_operator
+begin_operator
+move right jb ja
+0
+1
+0 0 91 90
+1
+end_operator
+begin_operator
+move right jb ja
+0
+1
+0 0 91 90
+1
+end_operator
+begin_operator
+move right jb jc
+0
+1
+0 0 91 92
+1
+end_operator
+begin_operator
+move right jb jc
+0
+1
+0 0 91 92
+1
+end_operator
+begin_operator
+move right jc ic
+0
+1
+0 0 92 82
+1
+end_operator
+begin_operator
+move right jc ic
+0
+1
+0 0 92 82
+1
+end_operator
+begin_operator
+move right jc jb
+0
+1
+0 0 92 91
+1
+end_operator
+begin_operator
+move right jc jb
+0
+1
+0 0 92 91
+1
+end_operator
+begin_operator
+move right jc jd
+0
+1
+0 0 92 93
+1
+end_operator
+begin_operator
+move right jc jd
+0
+1
+0 0 92 93
+1
+end_operator
+begin_operator
+move right jd id
+0
+1
+0 0 93 83
+1
+end_operator
+begin_operator
+move right jd id
+0
+1
+0 0 93 83
+1
+end_operator
+begin_operator
+move right jd jc
+0
+1
+0 0 93 92
+1
+end_operator
+begin_operator
+move right jd jc
+0
+1
+0 0 93 92
+1
+end_operator
+begin_operator
+move right jd je
+0
+1
+0 0 93 94
+1
+end_operator
+begin_operator
+move right jd je
+0
+1
+0 0 93 94
+1
+end_operator
+begin_operator
+move right je ie
+0
+1
+0 0 94 84
+1
+end_operator
+begin_operator
+move right je ie
+0
+1
+0 0 94 84
+1
+end_operator
+begin_operator
+move right je jd
+0
+1
+0 0 94 93
+1
+end_operator
+begin_operator
+move right je jd
+0
+1
+0 0 94 93
+1
+end_operator
+begin_operator
+move right je jf
+0
+1
+0 0 94 95
+1
+end_operator
+begin_operator
+move right je jf
+0
+1
+0 0 94 95
+1
+end_operator
+begin_operator
+move right jf if
+0
+1
+0 0 95 85
+1
+end_operator
+begin_operator
+move right jf if
+0
+1
+0 0 95 85
+1
+end_operator
+begin_operator
+move right jf je
+0
+1
+0 0 95 94
+1
+end_operator
+begin_operator
+move right jf je
+0
+1
+0 0 95 94
+1
+end_operator
+begin_operator
+move right jf jg
+0
+1
+0 0 95 96
+1
+end_operator
+begin_operator
+move right jf jg
+0
+1
+0 0 95 96
+1
+end_operator
+begin_operator
+move right jg ig
+0
+1
+0 0 96 86
+1
+end_operator
+begin_operator
+move right jg ig
+0
+1
+0 0 96 86
+1
+end_operator
+begin_operator
+move right jg jf
+0
+1
+0 0 96 95
+1
+end_operator
+begin_operator
+move right jg jf
+0
+1
+0 0 96 95
+1
+end_operator
+begin_operator
+move right jg jh
+0
+1
+0 0 96 97
+1
+end_operator
+begin_operator
+move right jg jh
+0
+1
+0 0 96 97
+1
+end_operator
+begin_operator
+move right jh ih
+0
+1
+0 0 97 87
+1
+end_operator
+begin_operator
+move right jh ih
+0
+1
+0 0 97 87
+1
+end_operator
+begin_operator
+move right jh jg
+0
+1
+0 0 97 96
+1
+end_operator
+begin_operator
+move right jh jg
+0
+1
+0 0 97 96
+1
+end_operator
+begin_operator
+move right jh ji
+0
+1
+0 0 97 98
+1
+end_operator
+begin_operator
+move right jh ji
+0
+1
+0 0 97 98
+1
+end_operator
+begin_operator
+move right ji ii
+0
+1
+0 0 98 88
+1
+end_operator
+begin_operator
+move right ji ii
+0
+1
+0 0 98 88
+1
+end_operator
+begin_operator
+move right ji jh
+0
+1
+0 0 98 97
+1
+end_operator
+begin_operator
+move right ji jh
+0
+1
+0 0 98 97
+1
+end_operator
+begin_operator
+move right ji jj
+0
+1
+0 0 98 99
+1
+end_operator
+begin_operator
+move right ji jj
+0
+1
+0 0 98 99
+1
+end_operator
+begin_operator
+move right jj ij
+0
+1
+0 0 99 89
+1
+end_operator
+begin_operator
+move right jj ij
+0
+1
+0 0 99 89
+1
+end_operator
+begin_operator
+move right jj ji
+0
+1
+0 0 99 98
+1
+end_operator
+begin_operator
+move right jj ji
+0
+1
+0 0 99 98
+1
+end_operator
+0

@@ -7,9 +7,9 @@
 	)
 
 	(:init
-		(AT STRIKER EE)
-		(AT LEFT EB)
-		(AT RIGHT EB)
+		(AT STRIKER FC)
+		(AT LEFT EE)
+		(AT RIGHT JE)
 		(HASBALL NONE)
 		(CONNECTED AA AB)
 		(CONNECTED AA BA)
@@ -373,5 +373,5 @@
 		(CONNECTED JJ IJ))
 
 	(:goal 
-		(at striker EI))
+		(at left CI))
 )
