@@ -390,18 +390,16 @@ SkillType NaoBehavior::selectSkill() {
                         }
 
                         VecPosition target = point;
-
-                        string inferInfoFileName = "inferInfo.txt";
-                        ofstream inferInfoFile(inferInfoFileName.c_str());
+                        string ballPos = "0";
 
                         //Where is the position of the ball?
                         //0 for center, 1 for left, 2 for right
                         if(ball.getY() >= 5)
-                            inferInfoFile << "1" << endl;
+                            ballPos = "1";
                         else if (ball.getY() <= -5)
-                            inferInfoFile << "2" << endl;
+                            ballPos = "2";
                         else
-                            inferInfoFile << "0" << endl;
+                            ballPos = "0";
 
                         int leftSideOpp = 0;
                         int rightSideOpp = 0;
@@ -421,9 +419,6 @@ SkillType NaoBehavior::selectSkill() {
                             else if (allTemp.getY() <= -5 && allTemp.getX() <= -4)
                                 rightSideOpp++;
                         }
-
-                        inferInfoFile << leftSideOpp << endl;
-                        inferInfoFile << rightSideOpp << endl;
 
                         switch(worldModel->getUNum())
                         {   
@@ -503,7 +498,7 @@ SkillType NaoBehavior::selectSkill() {
                         if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
                             // Close enough to desired position and orientation so just stand
 
-                            //system("python inference.py > inferOut.txt");
+                            //system("python inference.py %c %c %c &", ballPos, leftSideOpp, rightSideOpp);
 
                             ifstream inferFileOut("inferOut.txt");
                             inferFileOut >> formation;
@@ -512,7 +507,7 @@ SkillType NaoBehavior::selectSkill() {
                         } else if (me.getDistanceTo(target) < .5) {
                             // Close to desired position so start turning to face center
 
-                            //system("python inference.py > inferOut.txt");
+                            //system("python inference.py %c %c %c &", ballPos, leftSideOpp, rightSideOpp);
             
                             ifstream inferFileOut("inferOut.txt");
                             inferFileOut >> formation;
