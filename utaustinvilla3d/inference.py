@@ -5,13 +5,12 @@ import random
 import os
 import sys
 import fileinput
+import time
 
 
 posBall = sys.argv[1]
 leftOpp = sys.argv[2]
 rightOpp = sys.argv[3]
-unum = int(sys.argv[4])
-
 
 vBC = 0
 vBR = 0
@@ -83,7 +82,3 @@ for i in range(3):
 with open('../defender.soln', 'w') as file:
 	file.write(str(maxIndex))
 	file.close()
-
-lockFile = "../%d.lock" % (unum)
-time.sleep(10) # this python file being kicked off makes all the agents fall, sleep the agents have time to actually excecute their plan
-os.remove(lockFile)

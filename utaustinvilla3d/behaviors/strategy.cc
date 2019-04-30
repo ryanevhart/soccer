@@ -10,6 +10,7 @@ extern int agentBodyType;
 
 int pastDefender = -1;
 string formation = "0";
+double lastGameTime = 0;
 
 /*
  * Real game beaming.
@@ -166,7 +167,7 @@ SkillType NaoBehavior::selectSkill() {
     int unum = worldModel->getUNum();
     int lock_fd = -1;
 
-    if (unum == 2 || unum == 3 || unum == 4 || unum == 7) {
+    if (unum == 2 || unum == 3 || unum == 4) {
         char lockfile[50];
         snprintf(lockfile, sizeof(lockfile), "../%d.lock", worldModel->getUNum());
         lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
@@ -203,11 +204,11 @@ SkillType NaoBehavior::selectSkill() {
     }
 
     bool imClosestToBall = playerClosestToBall == worldModel->getUNum();
-    bool ourBall = ball.getX() >= -3;
+    bool ourBall = ball.getX() >= -1;
     VecPosition point = VecPosition(-4, 0, 0);
 
     // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
-    bool dontReadCommandFromFile = !(unum == 2 || unum == 3 || unum == 4 || unum == 7); //2,3,4 are the only agents that read from file rn
+    bool dontReadCommandFromFile = !(unum == 2 || unum == 3 || unum == 4); //2,3,4 are the only agents that read from file rn
     
     if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
 
@@ -442,15 +443,15 @@ SkillType NaoBehavior::selectSkill() {
             }
             else if (worldModel->getUNum() <= 6) { // attacker
                 if (worldModel->getUNum() == 2) { // striker
-                    return goToTarget(VecPosition(0, 0, 0));
+                    return goToTarget(VecPosition(-1, 0, 0));
                 } else if (worldModel->getUNum() == 3) { // right mid wing
-                    return goToTarget(VecPosition(0, -5, 0));
+                    return goToTarget(VecPosition(-1, -5, 0));
                 } else if (worldModel->getUNum() == 4) { //left mid wing
-                    return goToTarget(VecPosition(0, 5, 0));
+                    return goToTarget(VecPosition(-1, 5, 0));
                 } else if (worldModel->getUNum() == 5) { //right far wing
-                    return goToTarget(VecPosition(0, -10, 0));
+                    return goToTarget(VecPosition(-1, -10, 0));
                 } else if (worldModel->getUNum() == 6) { //left far wing
-                    return goToTarget(VecPosition(0, 10, 0));
+                    return goToTarget(VecPosition(-1, 10, 0));
                 } 
             } else {
                 if (teamClosestToBall == worldModel->getUNum()) {
@@ -471,13 +472,11 @@ SkillType NaoBehavior::selectSkill() {
 
                         if(allDistanceToBall < 1.5) {
                             //May need to change destination
-                            cout << "teamClosestToBall->KICK_DRIBBLE" << endl;
                             return kickBall(KICK_DRIBBLE, VecPosition(5, 0, 0));
                         }   
                     }
 
                     //May need to change destination
-                    cout << "teamClosestToBall->KICK_FORWARD" << endl;
                     return kickBall(KICK_FORWARD, VecPosition(5,0,0));
 
                 }
@@ -598,43 +597,42 @@ SkillType NaoBehavior::selectSkill() {
                     // Adjust target to not be too close to teammates
                     target = collisionAvoidance(true /*teammate*/, false/*opponent*/, false/*ball*/, 1/*proximity thresh*/, .25/*collision thresh*/, target, true/*keepDistance*/);
 
-                    if (lock_fd > 0 && unum == 7) {
-                        if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
-                            // Close enough to desired position and orientation so just stand
 
+                    if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
+                        // Close enough to desired position and orientation so just stand
+
+                        if(worldModel->getGameTime() - lastGameTime >= 50) {
+                            lastGameTime = worldModel->getGameTime();
                             char command[200];
                             snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
                             system(command);
 
                             ifstream inferFileOut("../defender.soln");
                             inferFileOut >> formation;
-
-                            cout << "SKILL_STAND for close to position" << endl;
-                            return SKILL_STAND;
-                        } else if (me.getDistanceTo(target) < .5) {
-                            // Close to desired position so start turning to face center
-
+                        }
+                        return SKILL_STAND;
+                    } else if (me.getDistanceTo(target) < .5) {
+                        // Close to desired position so start turning to face center
+ 
+                        if(worldModel->getGameTime() - lastGameTime >= 50) {
+                            lastGameTime = worldModel->getGameTime();
                             char command[200];
                             snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
                             system(command);
-            
+
                             ifstream inferFileOut("../defender.soln");
                             inferFileOut >> formation;
-
-                            cout << "Close to target" << endl;
-                            return goToTargetRelative(worldModel->g2l(target), localPointAngle);
-                        } else {
-                            // Move toward target location
-                            cout << "Go to target" << endl;
-                            return goToTarget(target);
-                        } 
+                        }
+                        return goToTargetRelative(worldModel->g2l(target), localPointAngle);
+                    } else {
+                        // Move toward target location
+                        return goToTarget(target);
                     }
                                   
                 }
             }
         }      
         // Have closest player kick the ball toward the center
-        cout << "What" << endl;
         return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
     }
     
