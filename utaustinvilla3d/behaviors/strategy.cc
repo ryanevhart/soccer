@@ -498,7 +498,9 @@ SkillType NaoBehavior::selectSkill() {
                         if (me.getDistanceTo(target) < .25 && abs(localPointAngle) <= 10) {
                             // Close enough to desired position and orientation so just stand
 
-                            //system("python inference.py %c %c %c &", ballPos, leftSideOpp, rightSideOpp);
+                            char command[200];
+                            snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
+                            system(command);
 
                             ifstream inferFileOut("inferOut.txt");
                             inferFileOut >> formation;
@@ -507,7 +509,9 @@ SkillType NaoBehavior::selectSkill() {
                         } else if (me.getDistanceTo(target) < .5) {
                             // Close to desired position so start turning to face center
 
-                            //system("python inference.py %c %c %c &", ballPos, leftSideOpp, rightSideOpp);
+                            char command[200];
+                            snprintf(command, sizeof(command), "python inference.py %c %c %c &" , ballPos, leftSideOpp, rightSideOpp);
+                            system(command);
             
                             ifstream inferFileOut("inferOut.txt");
                             inferFileOut >> formation;

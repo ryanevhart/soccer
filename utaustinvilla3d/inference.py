@@ -78,7 +78,6 @@ for i in range(3):
     if probability > maxProb:
         maxProb = probability
         maxIndex = i
-#print(maxIndex)
 
 with open('./defender.soln', 'w') as file:
 	file.write(str(maxIndex))
