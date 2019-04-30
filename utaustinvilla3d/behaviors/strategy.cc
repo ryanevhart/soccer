@@ -16,9 +16,64 @@ string formation = "0";
  * Filling params x y angle
  */
 void NaoBehavior::beam( double& beamX, double& beamY, double& beamAngle ) {
-    beamX = -HALF_FIELD_X + worldModel->getUNum();
-    beamY = 0;
-    beamAngle = 0;
+    switch(worldModel->getUNum()) {   
+        
+        case 1:
+            beamX = -15;
+            beamY = 0;
+            beamAngle = 0;
+            break;        
+        case 2:
+            beamX = -5;
+            beamY = 0;
+            beamAngle = 0;
+            break;        
+        case 3:
+            beamX = -5;
+            beamY = 3;
+            beamAngle = 0;
+            break;        
+        case 4:
+            beamX = -5;
+            beamY = -3;
+            beamAngle = 0;
+            break;        
+        case 5:
+            beamX = -10;
+            beamY = -0;
+            beamAngle = 0;
+            break;        
+        case 6:
+            beamX = -9;
+            beamY = 3;
+            beamAngle = 0;
+            break;        
+        case 7:
+            beamX = -8;
+            beamY = 6;
+            beamAngle = 0;
+            break;        
+        case 8:
+            beamX = -7;
+            beamY = 9;
+            beamAngle = 0;
+            break;        
+        case 9:
+            beamX = -9;
+            beamY = -3;
+            beamAngle = 0;
+            break;        
+        case 10:
+            beamX = -8;
+            beamY = -6;
+            beamAngle = 0;
+            break;        
+        case 11:
+            beamX = -7;
+            beamY = -9;
+            beamAngle = 0;
+            break;
+    }
 }
 
 
