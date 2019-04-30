@@ -166,7 +166,7 @@ SkillType NaoBehavior::selectSkill() {
     int unum = worldModel->getUNum();
     int lock_fd = -1;
 
-    if (unum == 2 || unum == 3 || unum == 4) {
+    if (unum == 2 || unum == 3 || unum == 4 || unum == 7) {
         char lockfile[50];
         snprintf(lockfile, sizeof(lockfile), "../%d.lock", worldModel->getUNum());
         lock_fd = open(lockfile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
@@ -207,7 +207,7 @@ SkillType NaoBehavior::selectSkill() {
     VecPosition point = VecPosition(-4, 0, 0);
 
     // if this bool is true, the lock file for the corresponding agent will not be deleted, so we don't care about lock_fd
-    bool dontReadCommandFromFile = !(unum == 2 || unum == 3 || unum == 4); //2,3,4 are the only agents that read from file rn
+    bool dontReadCommandFromFile = !(unum == 2 || unum == 3 || unum == 4 || unum == 7); //2,3,4 are the only agents that read from file rn
     
     if (lock_fd > 0 || dontReadCommandFromFile) { // need to update action
 
