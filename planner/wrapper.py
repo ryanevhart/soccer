@@ -485,6 +485,6 @@ for line in arr:
 		alreadyWrote = alreadyWrote + 1
 		
 
-time.sleep(10) # this python file being kicked off makes all the agents fall, sleep the agents have time to actually excecute their plan
+time.sleep(5) # this python file being kicked off makes all the agents fall, sleep the agents have time to actually excecute their plan
 os.remove(lockFile)
 #python /home/ryan/591/hw3/planner/fast-downward.py /home/ryan/591/hw3/planner/domain.pddl /home/ryan/591/hw3/planner/right_corner_problem.pddl --search "astar(lmcut())"

@@ -7,8 +7,8 @@
 	)
 
 	(:init
-		(AT STRIKER FB)
-		(AT LEFT FB)
+		(AT STRIKER EI)
+		(AT LEFT BI)
 		(AT RIGHT EE)
 		(HASBALL NONE)
 		(CONNECTED AA AB)

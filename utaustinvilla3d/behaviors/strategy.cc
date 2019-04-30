@@ -435,11 +435,13 @@ SkillType NaoBehavior::selectSkill() {
 
                         if(allDistanceToBall < 1.5) {
                             //May need to change destination
+                            cout << "teamClosestToBall->KICK_DRIBBLE" << endl;
                             return kickBall(KICK_DRIBBLE, VecPosition(5, 0, 0));
                         }   
                     }
 
                     //May need to change destination
+                    cout << "teamClosestToBall->KICK_FORWARD" << endl;
                     return kickBall(KICK_FORWARD, VecPosition(5,0,0));
 
                 }
@@ -571,6 +573,7 @@ SkillType NaoBehavior::selectSkill() {
                             ifstream inferFileOut("../defender.soln");
                             inferFileOut >> formation;
 
+                            cout << "SKILL_STAND for close to position" << endl;
                             return SKILL_STAND;
                         } else if (me.getDistanceTo(target) < .5) {
                             // Close to desired position so start turning to face center
@@ -582,9 +585,11 @@ SkillType NaoBehavior::selectSkill() {
                             ifstream inferFileOut("../defender.soln");
                             inferFileOut >> formation;
 
+                            cout << "Close to target" << endl;
                             return goToTargetRelative(worldModel->g2l(target), localPointAngle);
                         } else {
                             // Move toward target location
+                            cout << "Go to target" << endl;
                             return goToTarget(target);
                         } 
                     }
@@ -593,6 +598,7 @@ SkillType NaoBehavior::selectSkill() {
             }
         }      
         // Have closest player kick the ball toward the center
+        cout << "What" << endl;
         return kickBall(KICK_FORWARD, VecPosition(HALF_FIELD_X,0,0));
     }
     
