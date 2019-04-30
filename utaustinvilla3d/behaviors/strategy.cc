@@ -311,8 +311,26 @@ SkillType NaoBehavior::selectSkill() {
 
                 } else { // assistant attackers
                     if (imClosestToBall) {
+                        double distanceToStriker = abs(worldModel->getWorldObject(2)->pos.getX() - worldModel->getMyPosition().getX()) + abs(worldModel->getWorldObject(2)->pos.getY() - worldModel->getMyPosition().getY());
+                        double distanceToLeft = abs(worldModel->getWorldObject(3)->pos.getX() - worldModel->getMyPosition().getX()) + abs(worldModel->getWorldObject(3)->pos.getY() - worldModel->getMyPosition().getY());
+                        double distanceToRight = abs(worldModel->getWorldObject(2)->pos.getX() - worldModel->getMyPosition().getX()) + abs(worldModel->getWorldObject(2)->pos.getY() - worldModel->getMyPosition().getY());
+
+                        int closest = 2;
+
+                        if (worldModel->getWorldObject(3)->pos.getX() - worldModel->getMyPosition().getX() >= 0) {
+                            if (distanceToLeft < distanceToStriker && distanceToLeft < distanceToRight) {
+                                closest = 3;
+                            }
+                        }
+
+                        if (worldModel->getWorldObject(4)->pos.getX() - worldModel->getMyPosition().getX() >= 0) {
+                            if (distanceToRight < distanceToStriker && distanceToRight < distanceToLeft) {
+                                closest = 4;
+                            }
+                        }
+
                         if (closestDistanceToBall < 0.5) { 
-                            return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+                            return kickBall(KICK_FORWARD, worldModel->getWorldObject(closest)->pos); // kick towards striker
                         } else { // otherwise walk in the direction of the ball
                             return goToTarget(ball);
                         }
@@ -327,22 +345,40 @@ SkillType NaoBehavior::selectSkill() {
             } else { // defender during attack [7,11]
 
                 if (imClosestToBall) {
+                    double distanceToStriker = abs(worldModel->getWorldObject(2)->pos.getX() - worldModel->getMyPosition().getX()) + abs(worldModel->getWorldObject(2)->pos.getY() - worldModel->getMyPosition().getY());
+                    double distanceToLeft = abs(worldModel->getWorldObject(3)->pos.getX() - worldModel->getMyPosition().getX()) + abs(worldModel->getWorldObject(3)->pos.getY() - worldModel->getMyPosition().getY());
+                    double distanceToRight = abs(worldModel->getWorldObject(2)->pos.getX() - worldModel->getMyPosition().getX()) + abs(worldModel->getWorldObject(2)->pos.getY() - worldModel->getMyPosition().getY());
+
+                    int closest = 2;
+
+                    if (worldModel->getWorldObject(3)->pos.getX() - worldModel->getMyPosition().getX() >= 0) {
+                        if (distanceToLeft < distanceToStriker && distanceToLeft < distanceToRight) {
+                            closest = 3;
+                        }
+                    }
+
+                    if (worldModel->getWorldObject(4)->pos.getX() - worldModel->getMyPosition().getX() >= 0) {
+                        if (distanceToRight < distanceToStriker && distanceToRight < distanceToLeft) {
+                            closest = 4;
+                        }
+                    }
+
                     if (closestDistanceToBall < 0.5) { 
-                        return kickBall(KICK_FORWARD, worldModel->getWorldObject(2)->pos); // kick towards striker
+                        return kickBall(KICK_FORWARD, worldModel->getWorldObject(closest)->pos); // kick towards striker
                     } else { // otherwise walk in the direction of the ball
                         return goToTarget(ball);
                     }
                 } else {
                     if (unum == 7) {
-                        return goToTarget(VecPosition(0, 0, 0)); 
+                        return goToTarget(VecPosition(-5, 0, 0)); 
                     } else if (unum == 8) {
-                        return goToTarget(VecPosition(0, 5, 0)); 
+                        return goToTarget(VecPosition(-7, 5, 0)); 
                     } else if (unum == 9) {
-                        return goToTarget(VecPosition(0, -5, 0)); 
+                        return goToTarget(VecPosition(-7, -5, 0)); 
                     } else if (unum == 10) {
-                        return goToTarget(VecPosition(0, 10, 0)); 
+                        return goToTarget(VecPosition(-10, 10, 0)); 
                     } else {
-                        return goToTarget(VecPosition(0, -10, 0)); 
+                        return goToTarget(VecPosition(-10, -10, 0)); 
                     }
                 }
             }
