@@ -108,7 +108,7 @@ SkillType NaoBehavior::selectSkill() {
     int playerClosestToBall = -1;
     double closestDistanceToBall = 10000;
 
-    for(int i = 1; i < 23; ++i) {
+    for(int i = 1; i <= 11; ++i) {
         VecPosition temp;
         int playerNum = i - WO_TEAMMATE1 + 1;
         if (worldModel->getUNum() == playerNum) {
@@ -132,7 +132,7 @@ SkillType NaoBehavior::selectSkill() {
     }
 
     bool imClosestToBall = playerClosestToBall == worldModel->getUNum();
-    bool ourBall = playerClosestToBall <= 11;
+    bool ourBall = ball.getX() > 0;
     cout << playerClosestToBall << endl;
     VecPosition point = VecPosition(-4, 0, 0);
 
